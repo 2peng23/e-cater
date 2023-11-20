@@ -1,79 +1,98 @@
 <!-- Service Start -->
 <div class="container-xxl py-5">
     <div class="container">
-        <div class="section-title text-center">
-            <h1 class="display-5 mb-5">Our Services</h1>
+        <div class=" d-flex justify-content-between mb-3">
+            <h1 class="display-5">Cakes</h1>
+            <div class="d-flex align-items-center justify-content-between gap-1 ">
+                <select name="cake_category" class="form-select" id="cake_category">
+                    <option value="">All Cakes</option>
+                    <option value="">Option 1</option>
+                    <option value="">Option 2</option>
+                    <option value="">Option 3</option>
+                    <option value="">Option 4</option>
+                </select>
+                <img src="content/logo/b-logo.png" style="width: 60px; opactity: 1" alt="">
+            </div>
         </div>
         <div class="row g-4">
-            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="col-6 col-md-3 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="service-item">
                     <div class="overflow-hidden">
                         <img class="img-fluid" src="user/img/service-1.jpg" alt="">
                     </div>
-                    <div class="p-4 text-center border border-5 border-light border-top-0">
-                        <h4 class="mb-3">General Carpentry</h4>
-                        <p>Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam lorem diam.</p>
-                        <a class="fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a>
+                    <div class="border border-5 border-light border-top-0">
+                        <div class="d-flex justify-content-start p-2 ">
+                            <div class="rounded-circle border align-items-center ">
+                                <p style="" class="mb-3 fw-bold px-3 pt-3">P<span class="text-warning">500</span>
+                                </p>
+                            </div>
+                        </div>
+                        @if (Auth::check())
+                            <form action="">
+                                @csrf
+                                <div class="d-flex justify-content-end gap-2 mb-2 me-2">
+                                    <input type="number" class="form-control" min="0" name="quantity"
+                                        value="0" style="max-width: 50px">
+                                    <button class="btn btn-sm btn-primary " style="max-width: 95px">Add order</button>
+                                </div>
+                            </form>
+                        @else
+                            <div class="d-flex justify-content-end me-2 mb-2 rounded">
+                                <button class="btn btn-primary">
+                                    <a href="/login" class="text-white">Order</a>
+                                </button>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
+            <div class="col-6 col-md-3 wow fadeInUp" data-wow-delay="0.3s">
                 <div class="service-item">
                     <div class="overflow-hidden">
                         <img class="img-fluid" src="user/img/service-2.jpg" alt="">
                     </div>
                     <div class="p-4 text-center border border-5 border-light border-top-0">
-                        <h4 class="mb-3">Furniture Manufacturing</h4>
-                        <p>Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam lorem diam.</p>
-                        <a class="fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a>
+                        <p class="mb-3">Furniture Manufacturing</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
+            <div class="col-6 col-md-3 wow fadeInUp" data-wow-delay="0.5s">
                 <div class="service-item">
                     <div class="overflow-hidden">
                         <img class="img-fluid" src="user/img/service-3.jpg" alt="">
                     </div>
                     <div class="p-4 text-center border border-5 border-light border-top-0">
-                        <h4 class="mb-3">Furniture Remodeling</h4>
-                        <p>Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam lorem diam.</p>
-                        <a class="fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a>
+                        <p class="mb-3">Furniture Remodeling</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="col-6 col-md-3 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="service-item">
                     <div class="overflow-hidden">
                         <img class="img-fluid" src="user/img/service-4.jpg" alt="">
                     </div>
                     <div class="p-4 text-center border border-5 border-light border-top-0">
-                        <h4 class="mb-3">Wooden Floor</h4>
-                        <p>Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam lorem diam.</p>
-                        <a class="fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a>
+                        <p class="mb-3">Wooden Floor</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
+            <div class="col-6 col-md-3 wow fadeInUp" data-wow-delay="0.3s">
                 <div class="service-item">
                     <div class="overflow-hidden">
                         <img class="img-fluid" src="user/img/service-5.jpg" alt="">
                     </div>
                     <div class="p-4 text-center border border-5 border-light border-top-0">
-                        <h4 class="mb-3">Wooden Furniture</h4>
-                        <p>Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam lorem diam.</p>
-                        <a class="fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a>
+                        <p class="mb-3">Wooden Furniture</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
+            <div class="col-6 col-md-3 wow fadeInUp" data-wow-delay="0.5s">
                 <div class="service-item">
                     <div class="overflow-hidden">
                         <img class="img-fluid" src="user/img/service-6.jpg" alt="">
                     </div>
                     <div class="p-4 text-center border border-5 border-light border-top-0">
-                        <h4 class="mb-3">Custom Work</h4>
-                        <p>Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam lorem diam.</p>
-                        <a class="fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a>
+                        <p class="mb-3">Custom Work</p>
                     </div>
                 </div>
             </div>

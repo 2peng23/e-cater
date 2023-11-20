@@ -14,7 +14,4 @@
 
 
     @include('default.feature2')
-
-
-    @include('default.project')
 @endsection
