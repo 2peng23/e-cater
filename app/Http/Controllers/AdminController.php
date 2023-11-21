@@ -5,12 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\Cake;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
-    public function cake()
+    public function cake(Request $request)
     {
-        $cakes = Cake::latest()->paginate(5);
+
+        $cakes = DB::table('cakes')->orderBy('updated_at', 'desc');
+        $category = $request->category;
+        if ($category) {
+            $cakes->where('category', 'like', "%{$category}%");
+        }
+        // Paginate the results
+        $cakes = $cakes->paginate(5);
+
+        // Append parameters to pagination links
+        $cakes->appends(['category' => $category]);
         $category = Category::latest()->get();
         return view('admin.cake', compact('category', 'cakes'));
     }
@@ -44,6 +55,25 @@ class AdminController extends Controller
         $cake->save();
         return response()->json([
             'success' => "Cake added!"
+        ]);
+    }
+    public function editStock(Request $request)
+    {
+        $id = $request->id;
+        $cake = Cake::find($id);
+        return response()->json([
+            'cake' => $cake
+        ]);
+    }
+    public function addStock(Request $request)
+    {
+        $id = $request->cake_id;
+        $stock = $request->stock;
+        $cake = Cake::find($id);
+        $cake->stock = $stock;
+        $cake->save();
+        return response()->json([
+            'success' => 'Stock updated'
         ]);
     }
 }

@@ -13,7 +13,7 @@
         <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
             <div class="row">
                 {{-- Add Cake --}}
-                <div class="col-lg-8 d-flex flex-column">
+                <div class="col-lg-9 d-flex flex-column">
                     <div class="row flex-grow">
                         <div class="col-12 grid-margin stretch-card">
                             <div class="card card-rounded">
@@ -26,34 +26,41 @@
                                                 class="fa fa-plus "></i></button>
                                     </div>
                                     <div class="table-responsive  mt-1" id="cake-list">
-                                        <table class="table select-table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Cake</th>
-                                                    <th>Category</th>
-                                                    <th>Stock</th>
-                                                    <th>Price</th>
-                                                    <th>Status</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($cakes as $cake)
+                                        @if ($cakes->isEmpty())
+                                            <p class="text-danger">No cakes available.</p>
+                                        @else
+                                            <table class="table select-table table-hover ">
+                                                <thead>
                                                     <tr>
-                                                        <td>
-                                                            <img src="images/{{ $cake->image }}" alt="">
-                                                        </td>
-                                                        <td>{{ $cake->category }}</td>
-                                                        <td>{{ $cake->stock }}</td>
-                                                        <td>{{ $cake->price }}</td>
-                                                        <td>
-                                                            <div class="badge badge-opacity-warning">
-                                                                Unavailable</div>
-                                                        </td>
+                                                        <th>Cake</th>
+                                                        <th>Category</th>
+                                                        <th>Stock</th>
+                                                        <th>Price</th>
+                                                        <th>Status</th>
                                                     </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                        {{ $cakes->links('vendor.pagination.bootstrap-5') }}
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($cakes as $cake)
+                                                        <tr>
+                                                            <td>
+                                                                <img src="images/{{ $cake->image }}" alt="">
+                                                            </td>
+                                                            <td>{{ $cake->category }}</td>
+                                                            <td>
+                                                                <button class="btn btn-stock"
+                                                                    value="{{ $cake->id }}">{{ $cake->stock }}</button>
+                                                            </td>
+                                                            <td>{{ $cake->price }}</td>
+                                                            <td>
+                                                                <div class="badge badge-opacity-warning">
+                                                                    Unavailable</div>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                            {{ $cakes->links('vendor.pagination.bootstrap-5') }}
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +68,7 @@
                     </div>
                 </div>
                 {{-- Add Category --}}
-                <div class="col-lg-4 d-flex flex-column">
+                <div class="col-lg-3 d-flex flex-column">
                     <div class="row flex-grow">
                         <div class="col-12 grid-margin stretch-card">
                             <div class="card card-rounded">
@@ -81,12 +88,16 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <tr>
+                                                    <td data-value="" id="category_select" style="cursor: pointer">All
+                                                        Cakes</td>
+                                                </tr>
                                                 @foreach ($category as $item)
                                                     <tr>
                                                         <td class="d-flex justify-content-between">
-                                                            <button class="btn"
-                                                                value="{{ $item->category_name }}">{{ $item->category_name }}</button>
-                                                            <i class="mdi mdi-cake"></i>
+                                                            <p data-value="{{ $item->category_name }}" id="category_select"
+                                                                style="cursor: pointer">
+                                                                {{ $item->category_name }}</p> <i class="mdi mdi-cake"></i>
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -105,4 +116,5 @@
     <x-add-category />
     <x-ajax-message />
     <x-add-cake :category=$category />
+    <x-add-stock />
 @endsection

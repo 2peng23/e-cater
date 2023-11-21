@@ -33,6 +33,8 @@ Route::middleware('auth')->group(function () {
         Route::get('cake', [AdminController::class, 'cake'])->name('cake');
         Route::post('create-category', [AdminController::class, 'createCategory'])->name('create-category');
         Route::post('add-cake', [AdminController::class, 'addCake'])->name('add-cake');
+        Route::get('edit-stock', [AdminController::class, 'editStock'])->name('edit-stock');
+        Route::post('add-stock', [AdminController::class, 'addStock'])->name('add-stock');
     });
 });
 
