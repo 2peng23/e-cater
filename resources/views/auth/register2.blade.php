@@ -24,8 +24,6 @@
 
 <body>
     <div class="container-fluid">
-
-
         <div class="row min-vh-100 " id="div2"> <!-- Add a custom class for styling -->
             <div class="col-lg-8 col-md-6 div2 full-height d-none d-md-block "> <!-- Add a custom class for styling -->
                 {{-- <img src="content/styling-images/1.jpg" alt=""> --}}

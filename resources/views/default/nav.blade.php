@@ -24,12 +24,31 @@
                     <a href="404.html" class="dropdown-item">404 Page</a>
                 </div>
             </div> --}}
-            <div class="nav-item nav-link " style="border-radius: 50%">
-                <a href="/login" class="bg-primary text-white px-3 py-2">Login</a>
-            </div>
-            <div class="nav-item nav-link">
-                <a href="/register" class="bg-primary text-white px-3 py-2">Register</a>
-            </div>
+            @if (Auth::check())
+                <a href="project.html" class="nav-item nav-link position-relative ">
+                    <p class="position-absolute fw-bolder" style="top: 5px; right:0">1</p>
+                    <i class="fa fa-shopping-cart fs-4 text-primary"></i>
+                </a>
+                <div class="nav-item nav-link " style="border-radius: 50%">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <a class="bg-primary text-white px-3 py-2" href="#" data-toggle="modal"
+                            data-target="#logoutModal" :href="route('logout')"
+                            onclick="event.preventDefault();
+                                            this.closest('form').submit();">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Logout
+                        </a>
+                    </form>
+                </div>
+            @else
+                <div class="nav-item nav-link " style="border-radius: 50%">
+                    <a href="/login" class="bg-primary text-white px-3 py-2">Login</a>
+                </div>
+                <div class="nav-item nav-link">
+                    <a href="/register" class="bg-primary text-white px-3 py-2">Register</a>
+                </div>
+            @endif
 
         </div>
     </div>

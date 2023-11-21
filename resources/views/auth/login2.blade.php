@@ -36,17 +36,22 @@
                         </a>
                     </div>
                     <h5 class="text-center fw-bolder fs-1 pb-4 text-muted">Welcome Back</h5>
-                    <form>
+                    <div class="p-3">
+                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                    </div>
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
                         <div class="form-group mb-4">
                             <label class="mb-2" for="username">Email Address <span
                                     class="text-danger">*</span></label>
-                            <input type="text" class="form-control py-2 px-3" style="border-radius: 20px"
-                                id="username" placeholder="Enter email address">
+                            <input type="text" name="email" class="form-control py-2 px-3" :value="old('email')"
+                                style="border-radius: 20px" id="username" placeholder="Enter email address">
                         </div>
                         <div class="form-group mb-4">
                             <label class="mb-2" for="password">Password <span class="text-danger">*</span></label>
-                            <input type="password" class="form-control py-2 px-3" style="border-radius: 20px"
-                                id="password" placeholder="Enter your password">
+                            <input type="password" name="password" class="form-control py-2 px-3"
+                                style="border-radius: 20px" id="password" placeholder="Enter your password">
                         </div>
                         <button type="submit" class="btn btn-primary py-2 px-3"
                             style="border-radius: 20px">Login</button>
