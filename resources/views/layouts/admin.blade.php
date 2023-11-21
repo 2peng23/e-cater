@@ -21,7 +21,7 @@
     <!-- inject:css -->
     <link rel="stylesheet" href="admin/css/vertical-layout-light/style.css">
     <!-- endinject -->
-    <link rel="shortcut icon" href="admin/images/favicon.png" />
+    <link rel="icon" href="content/logo/w-logo.png" />
     {{-- fa --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
@@ -234,7 +234,7 @@
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li class="nav-item">
                                             <a class="nav-link ps-0" href="/">Admin >
-                                                <span class="text-primary">Dashboard</span></a>
+                                                <span class="text-primary">{{ Route::currentRouteName() }}</span></a>
                                         </li>
                                     </ul>
 
@@ -611,8 +611,13 @@
     <!-- Custom js for this page-->
     <script src="admin/js/jquery.cookie.js" type="text/javascript"></script>
     <script src="admin/js/dashboard.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- <script src="../../js/Chart.roundedBarCharts.js"></script> -->
+    <script src="javascript/main.js"></script>
     <!-- End custom js for this page-->
+    @yield('scripts')
 </body>
 
 </html>

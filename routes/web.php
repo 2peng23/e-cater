@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
@@ -27,6 +28,13 @@ Route::get('/', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/dashboard', [HomeController::class, 'dashboard'])->middleware('auth')->name('dashboard');
+Route::middleware('auth')->group(function () {
+    Route::middleware('auth')->group(function () {
+        Route::get('cake', [AdminController::class, 'cake'])->name('cake');
+        Route::post('create-category', [AdminController::class, 'createCategory'])->name('create-category');
+        Route::post('add-cake', [AdminController::class, 'addCake'])->name('add-cake');
+    });
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

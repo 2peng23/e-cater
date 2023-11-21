@@ -5,6 +5,14 @@
                 <span class="icon-menu"></span>
             </button>
         </div>
+        <div>
+            <a href="/" class="navbar-brand brand-logo">
+                {{-- <div class="d-flex"> --}}
+                <p class="fw-bold">Murillo Cake Haus <br>& Catering Services</p>
+                {{-- <img src="content/logo/b-logo.png" alt="" style="width: 300px"> --}}
+                {{-- </div> --}}
+            </a>
+        </div>
         {{-- <div>
             <a class="navbar-brand brand-logo" href="index.html">
                 <img src="content/logo/b-logo.png" alt="logo" />

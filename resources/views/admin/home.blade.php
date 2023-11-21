@@ -42,7 +42,7 @@
                         <div class="col-6 mb-3">
                             <div class="card bg-success text-white">
                                 <div class="card-header d-flex justify-content-evenly ">
-                                    <h5>Order(Catering)</h5>
+                                    <h5>Rentals(Catering)</h5>
                                     <i class="fa fa-cake"></i>
                                 </div>
                                 <div class="card-body ">
