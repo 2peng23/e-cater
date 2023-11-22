@@ -9,9 +9,22 @@
                 @csrf
                 <input type="hidden" name="cake_id" id="cake_id">
                 <div class="modal-body">
-                    <label for="stock" class="form-label">Stock <span class="text-danger">*</span></label>
-                    <input type="number" class="form-control" name="stock" id="stock" placeholder="Stock value"
-                        required>
+                    <div class="mb-2">
+                        <label for="stock" class="form-label">Current Stock</label>
+                        <input type="number" readonly class="form-control" name="beginning_stock" id="beginning_stock"
+                            placeholder="Beginning Stock" required>
+                    </div>
+                    <div class="mb-2">
+                        <label for="stock" class="form-label">Ending Stock </label>
+                        <input type="number" readonly class="form-control" name="ending_stock" id="ending_stock"
+                            placeholder="Ending Stock" required>
+                    </div>
+                    <hr>
+                    <div class="mb-2">
+                        <label for="stock" class="form-label">Add Stock <span class="text-danger">*</span></label>
+                        <input type="number" min="1" class="form-control" name="stock" id="stock"
+                            placeholder="Stock value" required>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

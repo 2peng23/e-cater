@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cake;
 use App\Models\Category;
+use App\Models\Stock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -14,17 +15,17 @@ class AdminController extends Controller
     {
 
         $cakes = DB::table('cakes')->orderBy('updated_at', 'desc');
-        $category = $request->category;
-        if ($category) {
-            $cakes->where('category', 'like', "%{$category}%");
+        $category_name = $request->category;
+        if ($category_name) {
+            $cakes->where('category', 'like', "%{$category_name}%");
         }
         // Paginate the results
         $cakes = $cakes->paginate(5);
 
         // Append parameters to pagination links
-        $cakes->appends(['category' => $category]);
+        $cakes->appends(['category' => $category_name]);
         $category = Category::latest()->get();
-        return view('admin.cake', compact('category', 'cakes'));
+        return view('admin.cake', compact('category', 'cakes', 'category_name'));
     }
     // create cake category
     public function createCategory(Request $request)
@@ -79,9 +80,19 @@ class AdminController extends Controller
     public function addStock(Request $request)
     {
         $id = $request->cake_id;
-        $stock = $request->stock;
+        $stock_quantity = $request->stock;
+        // create new stock
+        $stock = new Stock();
+        $stock->item_id = $id;
+        $stock->beginning_stock = $request->beginning_stock;
+        $stock->ending_stock = $request->ending_stock;
+        $stock->quantity = $stock_quantity;
+        $stock->save();
+
+
+        // update cake stock
         $cake = Cake::find($id);
-        $cake->stock = $stock;
+        $cake->stock = $cake->stock + $stock_quantity;
         $cake->save();
         return response()->json([
             'success' => 'Stock updated'

@@ -19,9 +19,7 @@ $(document).on("submit", "#create-category-form", function (e) {
                 $("#success-modal").modal("show");
                 $("#success-message").html(res.success);
                 $("#add-category").modal("hide");
-                $("#cake-category").load(
-                    window.location.href + " #cake-category"
-                );
+                $("#all-data").load(window.location.href + " #all-data");
             } else {
                 $("#error-modal").modal("show");
                 $("#error-message").html(res.error);
@@ -71,7 +69,7 @@ $(document).on("submit", "#add-cake-form", function (e) {
                 $("#success-modal").modal("show");
                 $("#success-message").html(res.success);
                 $("#add-cake").modal("hide");
-                $("#cake-list").load(window.location.href + " #cake-list");
+                $("#all-data").load(window.location.href + " #all-data");
             } else {
                 $("#error-modal").modal("show");
                 $("#error-message").html(res.error);
@@ -107,7 +105,7 @@ $(document).on("click", "#category_select", function () {
         method: "get",
         data: { category: category },
         success: function (res) {
-            $("#cake-list").html($(res).find("#cake-list").html());
+            $("#all-data").html($(res).find("#all-data").html());
         },
     });
 });
@@ -122,7 +120,24 @@ $(document).on("click", ".btn-stock", function () {
         type: "get",
         success: function (res) {
             $("#cake_id").val(res.cake.id);
-            $("#stock").val(res.cake.stock);
+            $("#beginning_stock").val(res.cake.stock);
+
+            var value = 0; // Initialize value to 0
+
+            // Function to update #all_stock
+            function updateAllStock() {
+                // Use parseFloat to handle cases where res.cake.stock is a string
+                var currentStock = parseFloat(res.cake.stock) || 0;
+                $("#ending_stock").val(currentStock + value);
+            }
+
+            $("#stock").on("input", function (e) {
+                value = parseInt(e.target.value) || 0; // Parse the value as an integer or default to 0
+                updateAllStock(); // Call a function to update #all_stock
+            });
+
+            // Initial update
+            updateAllStock();
         },
     });
 });
@@ -142,7 +157,7 @@ $(document).on("submit", "#add-stock-form", function (e) {
                 $("#success-modal").modal("show");
                 $("#success-message").html(res.success);
                 $("#add-stock").modal("hide");
-                $("#cake-list").load(window.location.href + " #cake-list");
+                $("#all-data").load(window.location.href + " #all-data");
             } else {
                 $("#error-modal").modal("show");
                 $("#error-message").html(res.error);

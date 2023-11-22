@@ -11,7 +11,7 @@
     </div>
     <div class="tab-content tab-content-basic">
         <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
-            <div class="row">
+            <div class="row" id="all-data">
                 {{-- Add Cake --}}
                 <div class="col-lg-9 d-flex flex-column">
                     <div class="row flex-grow">
@@ -86,7 +86,7 @@
                                                 class="fa fa-plus "></i></button>
                                     </div>
                                     <div class="table-responsive  mt-1">
-                                        <table class="table select-table" id="cake-category">
+                                        <table class="table select-table table-hover " id="cake-category">
                                             <thead>
                                                 <tr>
                                                     <th>Name</th>
@@ -94,15 +94,26 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td data-value="" id="category_select" style="cursor: pointer">All
-                                                        Cakes</td>
+                                                    <td
+                                                        class="d-flex justify-content-between {{ $category_name == '' ? 'bg-secondary' : '' }}">
+                                                        <p data-value="" id="category_select" style="cursor: pointer">
+                                                            All Category</p>
+                                                        <p>
+                                                            @php
+                                                                $all_cake = App\Models\Cake::count();
+                                                            @endphp
+                                                            {{ $all_cake }}
+                                                            <i class="mdi mdi-cake"></i>
+                                                        </p>
+                                                    </td>
                                                 </tr>
                                                 @foreach ($category as $item)
                                                     @php
                                                         $cake_count = App\Models\Cake::where('category', $item->category_name)->count();
                                                     @endphp
                                                     <tr>
-                                                        <td class="d-flex justify-content-between">
+                                                        <td
+                                                            class="d-flex justify-content-between {{ $category_name == $item->category_name ? 'bg-secondary' : '' }}">
                                                             <p data-value="{{ $item->category_name }}" id="category_select"
                                                                 style="cursor: pointer">
                                                                 {{ $item->category_name }}</p>
@@ -124,9 +135,9 @@
 
             </div>
         </div>
+        <x-add-category />
+        <x-ajax-message />
+        <x-add-cake :category=$category />
+        <x-add-stock />
     </div>
-    <x-add-category />
-    <x-ajax-message />
-    <x-add-cake :category=$category />
-    <x-add-stock />
 @endsection
