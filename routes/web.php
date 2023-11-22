@@ -35,6 +35,8 @@ Route::middleware('auth')->group(function () {
         Route::post('add-cake', [AdminController::class, 'addCake'])->name('add-cake');
         Route::get('edit-stock', [AdminController::class, 'editStock'])->name('edit-stock');
         Route::post('add-stock', [AdminController::class, 'addStock'])->name('add-stock');
+        Route::get('cake-info', [AdminController::class, 'cakeInfo'])->name('cake-info');
+        Route::post('update-cake', [AdminController::class, 'updateCake'])->name('update-cake');
     });
 });
 

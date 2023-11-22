@@ -13,20 +13,24 @@ class AdminController extends Controller
 {
     public function cake(Request $request)
     {
-
         $cakes = DB::table('cakes')->orderBy('updated_at', 'desc');
         $category_name = $request->category;
+        $page = $request->input('cake_page', 10);
+
         if ($category_name) {
             $cakes->where('category', 'like', "%{$category_name}%");
         }
+
         // Paginate the results
-        $cakes = $cakes->paginate(5);
+        $cakes = $cakes->paginate($page);
 
         // Append parameters to pagination links
-        $cakes->appends(['category' => $category_name]);
+        $cakes->appends(['category' => $category_name, 'cake_page' => $page]); // Use 'cake_page' instead of 'page'
+
         $category = Category::latest()->get();
-        return view('admin.cake', compact('category', 'cakes', 'category_name'));
+        return view('admin.cake', compact('category', 'cakes', 'category_name', 'page'));
     }
+
     // create cake category
     public function createCategory(Request $request)
     {
@@ -96,6 +100,40 @@ class AdminController extends Controller
         $cake->save();
         return response()->json([
             'success' => 'Stock updated'
+        ]);
+    }
+    public function cakeInfo(Request $request)
+    {
+        $id = $request->id;
+        $cake = Cake::find($id);
+        return response()->json([
+            'cake' => $cake
+        ]);
+    }
+    public function updateCake(Request $request)
+    {
+        $id = $request->cake_id;
+        $cake = Cake::find($id);
+        $cake->category = $request->update_category;
+        $cake->price = $request->update_price;
+        // image
+        $photo = $request->update_image;
+        if ($photo) {
+            $photoname = $photo->getClientOriginalName();
+            $folder_name = $request->category;
+
+            // Create the directory if it doesn't exist
+            Storage::makeDirectory('public/images/cake/' . $folder_name);
+
+            // Move the uploaded image to the specified directory
+            $photo->move(public_path('images/cake/' . $folder_name), $photoname);
+
+            // Save the image path to the database
+            $cake->image = 'images/cake/' . $folder_name . '/' . $photoname;
+        }
+        $cake->save();
+        return response()->json([
+            'success' => "Cake updated!"
         ]);
     }
 }

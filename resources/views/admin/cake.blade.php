@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 @section('content')
     {{-- buttons --}}
-    <div class="my-2 d-flex justify-content-end">
+    {{-- <div class="my-2 d-flex justify-content-end">
         <div class="btn-wrapper">
             <a href="#" class="btn btn-otline-dark align-items-center"><i class="icon-share"></i> Share</a>
             <a href="#" class="btn btn-otline-dark"><i class="icon-printer"></i>
                 Print</a>
             <a href="#" class="btn btn-primary text-white me-0"><i class="icon-download"></i> Export</a>
         </div>
-    </div>
+    </div> --}}
     <div class="tab-content tab-content-basic">
         <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
             <div class="row" id="all-data">
@@ -19,8 +19,16 @@
                             <div class="card card-rounded">
                                 <div class="card-body">
                                     <div class="d-sm-flex justify-content-between align-items-start">
-                                        <div class="d-flex justify-content-between ">
+                                        <div class="d-flex justify-content-between align-items-center  gap-2 ">
                                             <h4 class="card-title card-title-dash">Cake</h4>
+                                            {{-- <div>
+                                                <select class="form-select" name="cake_page" id="cake_page">
+                                                    <option value="5" {{ $page == 5 ? 'selected' : '' }}>5</option>
+                                                    <option value="10" {{ $page == 10 ? 'selected' : '' }}>10</option>
+                                                    <option value="15" {{ $page == 15 ? 'selected' : '' }}>15</option>
+                                                    <option value="20" {{ $page == 20 ? 'selected' : '' }}>20</option>
+                                                </select>
+                                            </div> --}}
                                         </div>
                                         <button id="add-cake-btn" class="rounded-circle bg-primary text-white"><i
                                                 class="fa fa-plus "></i></button>
@@ -31,17 +39,18 @@
                                         @else
                                             <table class="table select-table table-hover ">
                                                 <thead>
-                                                    <tr>
+                                                    <tr class="text-center">
                                                         <th>Cake</th>
                                                         <th>Category</th>
                                                         <th>Stock</th>
                                                         <th>Price</th>
                                                         <th>Status</th>
+                                                        <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($cakes as $cake)
-                                                        <tr>
+                                                        <tr class="text-center">
                                                             <td>
                                                                 <img src="{{ $cake->image }}" alt="">
                                                             </td>
@@ -59,6 +68,17 @@
                                                                     <div class="badge badge-opacity-warning">
                                                                         Unavailable</div>
                                                                 @endif
+                                                            </td>
+                                                            <td>
+                                                                <button class="btn info-cake-btn"
+                                                                    value="{{ $cake->id }}">
+                                                                    <i class="mdi mdi-information text-info fs-6"></i>
+                                                                </button>
+                                                                <button class="btn edit-cake-btn"
+                                                                    value="{{ $cake->id }}">
+                                                                    <i
+                                                                        class="mdi mdi-circle-edit-outline text-success fs-6"></i>
+                                                                </button>
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -139,5 +159,7 @@
         <x-ajax-message />
         <x-add-cake :category=$category />
         <x-add-stock />
+        <x-info-cake />
+        <x-edit-cake :category=$category />
     </div>
 @endsection

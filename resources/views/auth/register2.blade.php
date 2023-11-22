@@ -12,7 +12,7 @@
     <style>
         .div2 {
             /* Set the background image */
-            background-image: url('content/Cakes/drip/13.png');
+            background-image: url('images/cake/Drip Cakes/13.png');
 
             /* Specify background properties */
             background-size: cover;
@@ -36,10 +36,10 @@
                         </a>
                     </div>
                     <h5 class="text-center fw-bolder fs-1 pb-4 text-muted">Create Your Account</h5>
-                    <form>
+                    <form class="px-5">
                         <div class="form-group mb-4">
                             <label class="mb-2" for="Name">Name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control py-2 px-3" style="border-radius: 20px"
+                            <input autofocus type="text" class="form-control py-2 px-3" style="border-radius: 20px"
                                 id="Name" placeholder="Enter Full Name">
                         </div>
                         <div class="form-group mb-4">
@@ -63,7 +63,7 @@
                             style="border-radius: 20px">Register</button>
                     </form>
 
-                    <p class="mt-5 fs-6">Already have an account? <a href="/login"
+                    <p class="mt-5 fs-6 px-5">Already have an account? <a href="/login"
                             class="fw-bold text-decoration-none text-primary" style="cursor: pointer">Login</a>
                         now!
                     </p>

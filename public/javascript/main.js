@@ -109,6 +109,19 @@ $(document).on("click", "#category_select", function () {
         },
     });
 });
+// filter page
+$(document).on("change", "#cake_page", function () {
+    var cake_page = $(this).val();
+    console.log(cake_page);
+    $.ajax({
+        url: "/cake",
+        method: "get",
+        data: { cake_page: cake_page },
+        success: function (res) {
+            $("#all-data").html($(res).find("#all-data").html());
+        },
+    });
+});
 // add-stock
 $(document).on("click", ".btn-stock", function () {
     var id = $(this).val();
@@ -157,6 +170,98 @@ $(document).on("submit", "#add-stock-form", function (e) {
                 $("#success-modal").modal("show");
                 $("#success-message").html(res.success);
                 $("#add-stock").modal("hide");
+                $("#all-data").load(window.location.href + " #all-data");
+            } else {
+                $("#error-modal").modal("show");
+                $("#error-message").html(res.error);
+            }
+            // If you want to hide a success message after 1.5 seconds, uncomment the following lines
+            setTimeout(function () {
+                $("#success-modal").modal("hide");
+                $("#error-modal").modal("hide");
+            }, 2000);
+        },
+        error: function (xhr, status, error) {
+            // If you want to handle errors and display error messages, uncomment the following lines
+            var errors = xhr.responseJSON.errors;
+            var errorString = "";
+            $.each(errors, function (key, value) {
+                errorString += value + "<br>";
+            });
+            $("#error-modal").modal("show");
+            $("#error-message").html(errorString);
+            setTimeout(function () {
+                $("#error-modal").modal("hide");
+            }, 2000);
+        },
+    });
+});
+// info cake
+$(document).on("click", ".info-cake-btn", function () {
+    console.log("click");
+    var id = $(this).val();
+    $("#info-cake").modal("show");
+    $.ajax({
+        url: "/cake-info",
+        type: "get",
+        data: { id: id },
+        success: function (res) {
+            var data = res.cake;
+            $("#info_cake_category").html(data.category);
+            $("#info_cake_price").html(data.price);
+            $("#info_cake_stock").html(data.stock);
+            $("#info_cake_image").attr("src", data.image);
+        },
+    });
+});
+// edit cake
+$(document).on("click", ".edit-cake-btn", function () {
+    console.log("click");
+    var id = $(this).val();
+    $("#update-cake").modal("show");
+    $.ajax({
+        url: "/cake-info",
+        type: "get",
+        data: { id: id },
+        success: function (res) {
+            var data = res.cake;
+            $("#update_cake_id").val(id);
+            $("#update_category").val(data.category);
+            $("#update_price").val(data.price);
+            // Assuming you have the initial value of data.image
+            var initialImageUrl = data.image;
+
+            // Set the initial value
+            $("#update_image_preview").attr("src", initialImageUrl);
+
+            // Add an event listener for changes
+            var imageInput = $("#update_image");
+
+            imageInput.on("change", function () {
+                var imageUrl = URL.createObjectURL(this.files[0]);
+                $("#update_image_preview").attr("src", imageUrl);
+            });
+        },
+    });
+});
+//submit update cake
+$(document).on("submit", "#update-cake-form", function (e) {
+    e.preventDefault();
+    // Get the form data
+    var formData = new FormData(this);
+    $.ajax({
+        url: "/update-cake",
+        type: "post",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (res) {
+            // Reset the form
+            $("#update-cake-form")[0].reset();
+            if (res.success) {
+                $("#success-modal").modal("show");
+                $("#success-message").html(res.success);
+                $("#update-cake").modal("hide");
                 $("#all-data").load(window.location.href + " #all-data");
             } else {
                 $("#error-modal").modal("show");

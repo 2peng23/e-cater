@@ -12,7 +12,7 @@
     <style>
         .div1 {
             /* Set the background image */
-            background-image: url('content/Cakes/drip/1.png');
+            background-image: url('images/cake/Drip Cakes/1.png');
 
             /* Specify background properties */
             background-size: cover;
@@ -40,13 +40,14 @@
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('login') }}" class="px-5">
                         @csrf
                         <div class="form-group mb-4">
                             <label class="mb-2" for="username">Email Address <span
                                     class="text-danger">*</span></label>
-                            <input type="text" name="email" class="form-control py-2 px-3" :value="old('email')"
-                                style="border-radius: 20px" id="username" placeholder="Enter email address">
+                            <input autofocus type="text" name="email" class="form-control py-2 px-3"
+                                :value="old('email')" style="border-radius: 20px" id="username"
+                                placeholder="Enter email address">
                         </div>
                         <div class="form-group mb-4">
                             <label class="mb-2" for="password">Password <span class="text-danger">*</span></label>
@@ -57,7 +58,7 @@
                             style="border-radius: 20px">Login</button>
                     </form>
 
-                    <p class="mt-5 fs-6">Don't have an account yet? <a href="/register"
+                    <p class="mt-5 fs-6 px-5">Don't have an account yet? <a href="/register"
                             class="fw-bold text-decoration-none text-primary" style="cursor: pointer">Register</a>
                         for free
                     </p>

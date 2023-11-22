@@ -146,13 +146,17 @@
                         <div class="col-12 grid-margin stretch-card">
                             <div class="card card-rounded">
                                 <div class="card-body">
+                                    @php
+                                        $cakes = App\Models\Cake::where('stock', '<=', 0)->get();
+                                    @endphp
                                     <div class="d-sm-flex justify-content-between align-items-start">
                                         <div>
                                             <h4 class="card-title card-title-dash">Unavailable Cake</h4>
-                                            <p class="card-subtitle card-subtitle-dash">0</p>
+                                            <p class="card-subtitle card-subtitle-dash">{{ $cakes->count() }}</p>
                                         </div>
                                     </div>
                                     <div class="table-responsive  mt-1" style="max-height: 300px">
+
                                         <table class="table select-table">
                                             <thead>
                                                 <tr>
@@ -162,16 +166,18 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <img src="content/Cakes/Drip/1.png" alt="">
-                                                    </td>
-                                                    <td>0</td>
-                                                    <td>
-                                                        <div class="badge badge-opacity-warning">
-                                                            Unavailable</div>
-                                                    </td>
-                                                </tr>
+                                                @foreach ($cakes as $cake)
+                                                    <tr>
+                                                        <td>
+                                                            <img src="{{ $cake->image }}" alt="">
+                                                        </td>
+                                                        <td>{{ $cake->stock }}</td>
+                                                        <td>
+                                                            <div class="badge badge-opacity-warning">
+                                                                Unavailable</div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>

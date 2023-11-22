@@ -24,7 +24,7 @@
                 <div class="col-6 col-md-3 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="service-item">
                         <div class="overflow-hidden">
-                            <img class="img-fluid" src="images/{{ $cake->image }}" alt="">
+                            <img class="img-fluid" src="{{ $cake->image }}" alt="">
                         </div>
                         <div class="border border-5 border-light border-top-0">
                             <div class="d-flex justify-content-start p-2 ">
