@@ -10,7 +10,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
-            <a href="index.html" class="nav-item nav-link active">Home</a>
+            <a href="index.html" class="nav-item nav-link">Home</a>
             <a href="about.html" class="nav-item nav-link">About</a>
             <a href="service.html" class="nav-item nav-link">Cakes</a>
             <a href="project.html" class="nav-item nav-link">Services</a>
@@ -25,8 +25,14 @@
                 </div>
             </div> --}}
             @if (Auth::check())
-                <a href="project.html" class="nav-item nav-link position-relative ">
-                    <p class="position-absolute fw-bolder" style="top: 5px; right:0">1</p>
+                <a href="{{ route('cart-items') }}"
+                    class="nav-item nav-link position-relative {{ request()->routeIs('cart-items') ? 'active' : '' }}">
+                    <p class="position-absolute fw-bolder" style="top: 5px; right:0">
+                        @php
+                            $cart_count = App\Models\Cart::where('cart_id', Auth::user()->id)->count();
+                        @endphp
+                        {{ $cart_count }}
+                    </p>
                     <i class="fa fa-shopping-cart fs-4 text-primary"></i>
                 </a>
                 <div class="nav-item nav-link " style="border-radius: 50%">

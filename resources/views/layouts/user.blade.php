@@ -36,6 +36,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    {{-- font family --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -82,7 +87,7 @@
     </div>
     <!-- Topbar End --> --}}
 
-
+    <x-ajax-message />
     @include('default.nav')
     @yield('content')
     @include('default.footer')
@@ -106,6 +111,7 @@
 
     <!-- Template Javascript -->
     <script src="user/js/main.js"></script>
+    <script src="javascript/main.js"></script>
     @yield('scripts')
 </body>
 

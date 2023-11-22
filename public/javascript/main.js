@@ -288,3 +288,76 @@ $(document).on("submit", "#update-cake-form", function (e) {
         },
     });
 });
+
+// User Cake
+
+// filter cake category (user)
+$(document).on("change", "#filter-cake-category", function () {
+    var cake_category = $(this).val();
+    console.log(cake_category);
+    $.ajax({
+        url: "/",
+        data: { cake_category: cake_category },
+        type: "GET",
+        success: function (res) {
+            console.log(res);
+            $("#cake-section").html($(res).find("#cake-section").html());
+        },
+    });
+});
+$(document).on("change", "#filter-cake-category-user", function () {
+    var cake_category = $(this).val();
+    console.log(cake_category);
+    $.ajax({
+        url: "/dashboard",
+        data: { cake_category: cake_category },
+        type: "GET",
+        success: function (res) {
+            console.log(res);
+            $("#cake-section").html($(res).find("#cake-section").html());
+        },
+    });
+});
+//submit add cart
+$(document).on("submit", "#add-cart-form", function (e) {
+    e.preventDefault();
+    // Get the form data
+    var formData = $(this).serialize();
+    $.ajax({
+        url: "/add-cart",
+        type: "post",
+        data: formData,
+        success: function (res) {
+            // Reset the form
+            $("#add-cart-form")[0].reset();
+            if (res.success) {
+                $("#success-modal").modal("show");
+                $("#success-message").html(res.success);
+                // $("#cake-section").load(
+                //     window.location.href + " #cake-section"
+                // );
+            } else {
+                $("#error-modal").modal("show");
+                $("#error-message").html(res.error);
+            }
+            // If you want to hide a success message after 2 seconds, uncomment the following lines
+            setTimeout(function () {
+                $("#success-modal").modal("hide");
+                $("#error-modal").modal("hide");
+            }, 2000);
+        },
+        error: function (xhr, status, error) {
+            // If you want to handle errors and display error messages, uncomment the following lines
+            var errors = xhr.responseJSON.errors;
+            var errorString = "";
+            $.each(errors, function (key, value) {
+                errorString += value + "<br>";
+            });
+            $("#error-modal").modal("show");
+            $("#error-message").html(errorString);
+            setTimeout(function () {
+                $("#error-modal").modal("hide");
+            }, 2000);
+        },
+    });
+});

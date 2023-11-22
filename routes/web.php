@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -17,18 +18,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    if (Auth::check()) {
-        return redirect('/dashboard');
-    }
-    return view('default.home');
-});
+Route::get('/', [HomeController::class, 'index'])->name('index');
+// Route::get('/', function () {
+//     if (Auth::check()) {
+//         return redirect('/dashboard');
+//     }
+//     $cakes = App\Models\Cake::take(8)->get();
+//     return view('default.home');
+// });
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/dashboard', [HomeController::class, 'dashboard'])->middleware('auth')->name('dashboard');
 Route::middleware('auth')->group(function () {
+    // admin
     Route::middleware('auth')->group(function () {
         Route::get('cake', [AdminController::class, 'cake'])->name('cake');
         Route::post('create-category', [AdminController::class, 'createCategory'])->name('create-category');
@@ -37,6 +41,11 @@ Route::middleware('auth')->group(function () {
         Route::post('add-stock', [AdminController::class, 'addStock'])->name('add-stock');
         Route::get('cake-info', [AdminController::class, 'cakeInfo'])->name('cake-info');
         Route::post('update-cake', [AdminController::class, 'updateCake'])->name('update-cake');
+    });
+    // user
+    Route::middleware('auth')->group(function () {
+        Route::post('add-cart', [UserController::class, 'addCart'])->name('add-cart');
+        Route::get('cart-items', [UserController::class, 'cartItems'])->name('cart-items');
     });
 });
 
