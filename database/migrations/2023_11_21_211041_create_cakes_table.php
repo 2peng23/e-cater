@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('image');
             $table->string('stock')->default(0);
-            $table->string('price')->nullable();
+            $table->string('price')->default(0);
             $table->string('category');
             $table->timestamps();
         });

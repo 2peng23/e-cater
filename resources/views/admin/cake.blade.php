@@ -43,7 +43,7 @@
                                                     @foreach ($cakes as $cake)
                                                         <tr>
                                                             <td>
-                                                                <img src="images/{{ $cake->image }}" alt="">
+                                                                <img src="{{ $cake->image }}" alt="">
                                                             </td>
                                                             <td>{{ $cake->category }}</td>
                                                             <td>
@@ -52,8 +52,13 @@
                                                             </td>
                                                             <td>{{ $cake->price }}</td>
                                                             <td>
-                                                                <div class="badge badge-opacity-warning">
-                                                                    Unavailable</div>
+                                                                @if ($cake->stock > 0)
+                                                                    <div class="badge badge-opacity-success">
+                                                                        Available</div>
+                                                                @else
+                                                                    <div class="badge badge-opacity-warning">
+                                                                        Unavailable</div>
+                                                                @endif
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -93,11 +98,18 @@
                                                         Cakes</td>
                                                 </tr>
                                                 @foreach ($category as $item)
+                                                    @php
+                                                        $cake_count = App\Models\Cake::where('category', $item->category_name)->count();
+                                                    @endphp
                                                     <tr>
                                                         <td class="d-flex justify-content-between">
                                                             <p data-value="{{ $item->category_name }}" id="category_select"
                                                                 style="cursor: pointer">
-                                                                {{ $item->category_name }}</p> <i class="mdi mdi-cake"></i>
+                                                                {{ $item->category_name }}</p>
+                                                            <p>
+                                                                {{ $cake_count }}
+                                                                <i class="mdi mdi-cake"></i>
+                                                            </p>
                                                         </td>
                                                     </tr>
                                                 @endforeach

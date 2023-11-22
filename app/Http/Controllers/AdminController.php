@@ -6,6 +6,7 @@ use App\Models\Cake;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -50,9 +51,19 @@ class AdminController extends Controller
         // image
         $photo = $request->image;
         $photoname = $photo->getClientOriginalName();
-        $request->image->move('images', $photoname);
-        $cake->image = $photoname;
+        $folder_name = $request->category;
+
+        // Create the directory if it doesn't exist
+        Storage::makeDirectory('public/images/cake/' . $folder_name);
+
+        // Move the uploaded image to the specified directory
+        $photo->move(public_path('images/cake/' . $folder_name), $photoname);
+
+        // Save the image path to the database
+        $cake->image = 'images/cake/' . $folder_name . '/' . $photoname;
         $cake->save();
+
+
         return response()->json([
             'success' => "Cake added!"
         ]);

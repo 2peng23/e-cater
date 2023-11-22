@@ -38,10 +38,15 @@
                                 <form action="">
                                     @csrf
                                     <div class="d-flex justify-content-end gap-2 mb-2 me-2">
-                                        <input type="number" class="form-control" min="0" name="quantity"
-                                            value="0" style="max-width: 50px">
-                                        <button class="btn btn-sm btn-primary " style="max-width: 95px">Add
-                                            order</button>
+                                        @if ($cake->stock > 0)
+                                            <input type="number" class="form-control" min="0" name="quantity"
+                                                value="0" style="max-width: 50px">
+                                            <button class="btn btn-sm btn-primary " style="max-width: 95px">Add
+                                                order</button>
+                                        @else
+                                            <button class="btn btn-sm btn-danger " style="max-width: 95px">Out of
+                                                stock</button>
+                                        @endif
                                     </div>
                                 </form>
                             @else

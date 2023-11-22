@@ -7,15 +7,26 @@
                 <div class="col-lg-6 d-flex flex-column">
                     <div class="row mt-3">
                         <div class="col-6 mb-3">
-                            <div class="card bg-success text-white">
-                                <div class="card-header d-flex justify-content-evenly ">
-                                    <h5>Cakes</h5>
-                                    <i class="fa fa-cake"></i>
+                            <a href="/cake" class="text-decoration-none">
+                                <div class="card bg-success text-white">
+                                    <div class="card-header d-flex justify-content-evenly ">
+                                        <h5>Cakes</h5>
+                                    </div>
+                                    <div class="card-body ">
+                                        <div class="d-flex justify-content-between ">
+                                            <p class="fw-bold fs-3 text-white">
+                                                @php
+                                                    $cake = App\Models\Cake::count();
+                                                @endphp
+                                                {{ $cake }}
+                                            </p>
+
+                                            <img src="content/logo/cake.svg" alt=""
+                                                style="max-width: 100px; height: 100px;">
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="card-body ">
-                                    <p class="fw-bold fs-3 text-white">0</p>
-                                </div>
-                            </div>
+                            </a>
                         </div>
                         <div class="col-6 mb-3">
                             <div class="card bg-success text-white">
@@ -24,7 +35,17 @@
                                     <i class="fa fa-cake"></i>
                                 </div>
                                 <div class="card-body ">
-                                    <p class="fw-bold fs-3 text-white">0</p>
+                                    <div class="d-flex justify-content-between ">
+                                        <p class="fw-bold fs-3 text-white">
+                                            @php
+                                                $cake = App\Models\Cake::count();
+                                            @endphp
+                                            {{ $cake }}
+                                        </p>
+
+                                        <img src="content/logo/decor.svg" alt=""
+                                            style="max-width: 100px; height: 100px;">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -35,7 +56,17 @@
                                     <i class="fa fa-cake"></i>
                                 </div>
                                 <div class="card-body ">
-                                    <p class="fw-bold fs-3 text-white">0</p>
+                                    <div class="d-flex justify-content-between ">
+                                        <p class="fw-bold fs-3 text-white">
+                                            @php
+                                                $cake = App\Models\Cake::count();
+                                            @endphp
+                                            {{ $cake }}
+                                        </p>
+
+                                        <img src="content/logo/arrow.svg" alt=""
+                                            style="max-width: 100px; height: 100px;">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -46,7 +77,17 @@
                                     <i class="fa fa-cake"></i>
                                 </div>
                                 <div class="card-body ">
-                                    <p class="fw-bold fs-3 text-white">0</p>
+                                    <div class="d-flex justify-content-between ">
+                                        <p class="fw-bold fs-3 text-white">
+                                            @php
+                                                $cake = App\Models\Cake::count();
+                                            @endphp
+                                            {{ $cake }}
+                                        </p>
+
+                                        <img src="content/logo/arrow2.svg" alt=""
+                                            style="max-width: 100px; height: 100px;">
+                                    </div>
                                 </div>
                             </div>
                         </div>
