@@ -333,9 +333,7 @@ $(document).on("submit", "#add-cart-form", function (e) {
             if (res.success) {
                 $("#success-modal").modal("show");
                 $("#success-message").html(res.success);
-                // $("#cake-section").load(
-                //     window.location.href + " #cake-section"
-                // );
+                $("#navBar").load(window.location.href + " #navBar");
             } else {
                 $("#error-modal").modal("show");
                 $("#error-message").html(res.error);
@@ -360,4 +358,49 @@ $(document).on("submit", "#add-cart-form", function (e) {
             }, 2000);
         },
     });
+});
+// change the quantity
+$(document).on("change", "#cart-quantity", function (e) {
+    var quantity = $(this).val();
+    var id = $(this).data("id");
+    var priceElement = $(this).closest(".card-body").find("#cart-price"); // Select the price element
+
+    $.ajax({
+        url: "/add-quantity",
+        data: { quantity: quantity, id: id },
+        type: "get",
+        success: function (res) {
+            console.log(res);
+            priceElement.text("P" + res.price);
+            $("#total-price").html(res.total);
+        },
+    });
+});
+$(document).on("click", ".remove-cart", function () {
+    var id = $(this).val();
+    if (confirm("Remove item from cart?")) {
+        $.ajax({
+            url: "/remove-cart",
+            data: { id: id },
+            type: "get",
+            success: function (res) {
+                // Reset the form
+                if (res.success) {
+                    $("#success-modal").modal("show");
+                    $("#success-message").html(res.success);
+                } else {
+                    $("#error-modal").modal("show");
+                    $("#error-message").html(res.error);
+                    $("#cart-section").load(
+                        window.location.href + " #cart-section"
+                    );
+                }
+                // If you want to hide a success message after 1.5 seconds, uncomment the following lines
+                setTimeout(function () {
+                    $("#success-modal").modal("hide");
+                    $("#error-modal").modal("hide");
+                }, 2000);
+            },
+        });
+    }
 });

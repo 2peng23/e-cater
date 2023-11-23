@@ -46,6 +46,8 @@ Route::middleware('auth')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::post('add-cart', [UserController::class, 'addCart'])->name('add-cart');
         Route::get('cart-items', [UserController::class, 'cartItems'])->name('cart-items');
+        Route::get('add-quantity', [UserController::class, 'addQuantity'])->name('add-quantity');
+        Route::get('remove-cart', [UserController::class, 'removeCart'])->name('add-quantity');
     });
 });
 

@@ -6,48 +6,44 @@
             <h1 class="text-center wow fadeInDown" data-wow-delay="0.5s" style="font-family: 'Josefin Sans', sans-serif;">Place
                 an Order Now!
             </h1>
-            <div class="row g-4">
+            <div class="row g-4 mt-5">
                 @foreach ($carts as $cart)
-                    {{-- <div class="col-6 col-md-3 wow fadeIn" data-wow-delay="0.5s">
-                        <div class="service-item">
-                            <div class="overflow-hidden">
-                                @php
-                                    $cake = App\Models\Cake::where('id', $cart->item_id);
-                                @endphp
-                                <img class="img-fluid" src="{{ $cake->image }}" alt="">
-                            </div>
-                            <div class="border border-5 border-light border-top-0">
-                                <div class="d-flex justify-content-start p-2 ">
-                                    <div class="rounded-circle border align-items-center ">
-                                        <p style="" class="mb-3 fw-bold px-3 pt-3">P<span
-                                                class="text-warning">{{ $cake->price }}</span>
-                                        </p>
+                    @php
+                        $cake = App\Models\Cake::where('id', $cart->item_id)->get();
+                    @endphp
+                    @foreach ($cake as $cake)
+                        <div class="col-6 col-md-4 col-lg-2">
+                            <div class="card" style="width: 200px">
+                                <img src="{{ $cake->image }}" class="card-img-top" alt="Item 1">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center justify-content-between py-3">
+                                        <p>Quantity:</p>
+                                        <input type="number" class="p-2" style="width:60px"
+                                            value="{{ $cart->quantity }}" min="1" id="cart-quantity"
+                                            data-id="{{ $cart->id }}">
                                     </div>
+                                    <p class="card-text" id="cart-price">P{{ $cart->quantity * $cake->price }}</p>
+                                    <button value="{{ $cart->id }}" class="btn btn-primary remove-cart">
+                                        Remove from Cart
+                                    </button>
                                 </div>
-                                <form action="{{ route('add-cart') }}" method="POST" id="add-cart-form">
-                                    @csrf
-                                    <div class="d-flex justify-content-end gap-2 mb-2 me-2">
-                                        @if ($cake->stock > 0)
-                                            <input type="hidden" name="cart_id" value="{{ Auth::user()->id }}">
-                                            <input type="hidden" name="item_id" value="{{ $cake->id }}">
-                                            <input type="number" class="form-control" min="1" name="quantity"
-                                                value="1" style="max-width: 50px">
-                                            <button class="btn btn-sm btn-primary " type="submit"
-                                                style="max-width: 95px">Add
-                                                order</button>
-                                        @else
-                                            <button class="btn btn-sm btn-danger " style="max-width: 95px">Out of
-                                                stock</button>
-                                        @endif
-                                    </div>
-                                </form>
                             </div>
                         </div>
-                    </div> --}}
-                    <p>Cart: {{ $cart->item_id }}</p>
-                    <p>Cart: {{ $cart->cart_id }}</p>
-                    <p>Cart: {{ $cart->quantity }}</p>
+                    @endforeach
                 @endforeach
+                @if ($carts->isEmpty())
+                    No items in your cart.
+                @else
+                    <div class="mt-5">
+                        <div class="d-flex justify-content-end">
+                            <div>
+
+                                <p>Total Price: <span class="fw-bold" id="total-price">P{{ $totalPrice }}</span></p>
+                                <button class="btn btn-primary">Place Order <i class="fa fa-shopping-cart"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
