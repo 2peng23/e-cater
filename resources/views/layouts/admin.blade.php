@@ -234,7 +234,8 @@
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li class="nav-item">
                                             <a class="nav-link ps-0" href="/">Admin >
-                                                <span class="text-primary">{{ Route::currentRouteName() }}</span></a>
+                                                <span
+                                                    class="text-primary text-uppercase ">{{ Route::currentRouteName() }}</span></a>
                                         </li>
                                     </ul>
 
@@ -250,6 +251,7 @@
                                                 class="icon-download"></i> Export</a>
                                     </div>
                                 </div> --}}
+                                <x-ajax-message />
                                 @yield('content')
                                 {{-- table --}}
                                 {{-- <div class="tab-content tab-content-basic">

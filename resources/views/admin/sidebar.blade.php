@@ -21,7 +21,7 @@
                             Cake
                         </a>
                     </li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Catering
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('catering') }}">Catering
                             Service</a></li>
                 </ul>
             </div>

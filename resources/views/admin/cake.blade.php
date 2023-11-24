@@ -156,7 +156,6 @@
             </div>
         </div>
         <x-add-category />
-        <x-ajax-message />
         <x-add-cake :category=$category />
         <x-add-stock />
         <x-info-cake />

@@ -376,6 +376,7 @@ $(document).on("change", "#cart-quantity", function (e) {
         },
     });
 });
+// delete from cart
 $(document).on("click", ".remove-cart", function () {
     var id = $(this).val();
     if (confirm("Remove item from cart?")) {
@@ -403,4 +404,78 @@ $(document).on("click", ".remove-cart", function () {
             },
         });
     }
+});
+
+// admin cater
+
+// add-package
+$(document).on("click", "#add-package-btn", function () {
+    $("#add-package").modal("show");
+    // Counter for dynamic ID generation
+    let inclusionCount = 1;
+    // Add Inclusion button click event
+    $("#add-inclusion").on("click", function (e) {
+        e.preventDefault();
+        inclusionCount++;
+
+        // Clone the original inclusion input and update attributes
+        let newInclusionInput = $("#inclusion1").clone();
+        newInclusionInput
+            .attr({
+                id: "inclusion" + inclusionCount,
+                name: "inclusion[]",
+            })
+            .val("");
+        // Create a new div with class "my-1 form-control"
+        let newDiv = $("<div>").addClass("mb-2 col-6");
+        // Append the new inclusion input to the new div
+        newDiv.append(newInclusionInput);
+
+        // Append the new inclusion input to the container
+        $("#inc-container").append(newDiv);
+    });
+});
+// submit package
+$(document).on("submit", "#add-package-form", function (e) {
+    e.preventDefault();
+    // Get the form data
+    var formData = new FormData(this);
+    $.ajax({
+        url: "/add-package",
+        type: "post",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (res) {
+            // Reset the form
+            $("#add-package-form")[0].reset();
+            if (res.success) {
+                $("#success-modal").modal("show");
+                $("#success-message").html(res.success);
+                $("#add-package").modal("hide");
+                $("#all-data").load(window.location.href + " #all-data");
+            } else {
+                $("#error-modal").modal("show");
+                $("#error-message").html(res.error);
+            }
+            // If you want to hide a success message after 1.5 seconds, uncomment the following lines
+            setTimeout(function () {
+                $("#success-modal").modal("hide");
+                $("#error-modal").modal("hide");
+            }, 2000);
+        },
+        error: function (xhr, status, error) {
+            // If you want to handle errors and display error messages, uncomment the following lines
+            var errors = xhr.responseJSON.errors;
+            var errorString = "";
+            $.each(errors, function (key, value) {
+                errorString += value + "<br>";
+            });
+            $("#error-modal").modal("show");
+            $("#error-message").html(errorString);
+            setTimeout(function () {
+                $("#error-modal").modal("hide");
+            }, 2000);
+        },
+    });
 });

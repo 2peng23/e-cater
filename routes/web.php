@@ -34,6 +34,7 @@ Route::get('/dashboard', [HomeController::class, 'dashboard'])->middleware('auth
 Route::middleware('auth')->group(function () {
     // admin
     Route::middleware('auth')->group(function () {
+        // cake
         Route::get('cake', [AdminController::class, 'cake'])->name('cake');
         Route::post('create-category', [AdminController::class, 'createCategory'])->name('create-category');
         Route::post('add-cake', [AdminController::class, 'addCake'])->name('add-cake');
@@ -41,6 +42,9 @@ Route::middleware('auth')->group(function () {
         Route::post('add-stock', [AdminController::class, 'addStock'])->name('add-stock');
         Route::get('cake-info', [AdminController::class, 'cakeInfo'])->name('cake-info');
         Route::post('update-cake', [AdminController::class, 'updateCake'])->name('update-cake');
+        // catering
+        Route::get('catering', [AdminController::class, 'catering'])->name('catering');
+        Route::post('add-package', [AdminController::class, 'addPackage'])->name('add-package');
     });
     // user
     Route::middleware('auth')->group(function () {

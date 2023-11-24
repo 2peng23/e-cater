@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cake;
 use App\Models\Category;
+use App\Models\Package;
 use App\Models\Stock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -134,6 +135,35 @@ class AdminController extends Controller
         $cake->save();
         return response()->json([
             'success' => "Cake updated!"
+        ]);
+    }
+
+
+    // catering
+    public function catering()
+    {
+        $packages = Package::all();
+        return view('admin.catering', compact('packages'));
+    }
+    public function addPackage(Request $request)
+    {
+        $package = new Package();
+        $package->name = $request->name;
+        $package->price = $request->price;
+        $package->inclusion = $request->inclusion;
+        $photo = $request->image;
+        if ($photo) {
+            $photoname = $photo->getClientOriginalName();
+
+            // Move the uploaded image to the specified directory
+            $photo->move(public_path('images/package'), $photoname);
+
+            // Save the image path to the database
+            $package->image = 'images/package/' . $photoname;
+        }
+        $package->save();
+        return response()->json([
+            'success' => "Package added!"
         ]);
     }
 }
