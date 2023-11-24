@@ -10,10 +10,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0" id="navBar">
-            <a href="/" class="nav-item nav-link">Home</a>
-            <a href="about.html" class="nav-item nav-link">About</a>
-            <a href="service.html" class="nav-item nav-link">Cakes</a>
-            <a href="project.html" class="nav-item nav-link">Services</a>
+            <a href="/" class="nav-item nav-link active">Home</a>
+            <a href="#about-section" class="nav-item nav-link">About</a>
+            <a @if (request()->routeIs('cart-items')) href="dashboard/#cake-section"
+            @else
+            href="#cake-section" @endif
+                class="nav-item nav-link">Cakes</a>
+            <a href="#cater-section" class="nav-item nav-link">Services</a>
             {{-- <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                 <div class="dropdown-menu fade-up m-0">

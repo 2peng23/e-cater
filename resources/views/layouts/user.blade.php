@@ -7,6 +7,9 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
+    @auth
+        <base href="/dashboard">
+    @endauth
 
     <!-- Favicon -->
     <link href="content/logo/w-logo.png" rel="icon">
@@ -112,7 +115,16 @@
     <!-- Template Javascript -->
     <script src="user/js/main.js"></script>
     <script src="javascript/main.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.nav-link').click(function() {
+                $('.nav-link').removeClass('active'); // Remove active class from all links
+                $(this).addClass('active'); // Add active class to the clicked link
+            });
+        });
+    </script>
     @yield('scripts')
+
 </body>
 
 </html>

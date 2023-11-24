@@ -1,6 +1,6 @@
 <!-- Service Start -->
 <div class="container-xxl py-5">
-    <div class="container">
+    <div class="container" id="cater-section">
         <div class=" d-flex justify-content-between mb-3">
             <h1 class="display-5">Catering Service</h1>
             <div class="d-flex align-items-center justify-content-between gap-1 ">
