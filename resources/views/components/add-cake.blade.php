@@ -18,7 +18,8 @@
                     </div>
                     <div class="m-2">
                         <label for="image" class="form-label"> Image <span class="text-danger">*</span></label>
-                        <input type="file" class="form-control" name="image" id="image" required>
+                        <input type="file" class="form-control" name="image" id="image" accept="image/*"
+                            required>
                     </div>
 
                     <div class="m-2">

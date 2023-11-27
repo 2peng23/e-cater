@@ -20,7 +20,7 @@
                                 <div class="card-body">
                                     <div class="d-sm-flex justify-content-between align-items-start">
                                         <div class="d-flex justify-content-between align-items-center  gap-2 ">
-                                            <h4 class="card-title card-title-dash">Cake</h4>
+                                            <h4 class="card-title card-title-dash">Catering Package</h4>
                                             {{-- <div>
                                                 <select class="form-select" name="cake_page" id="cake_page">
                                                     <option value="5" {{ $page == 5 ? 'selected' : '' }}>5</option>
@@ -35,22 +35,43 @@
                                     </div>
                                     <div class="row mt-4">
                                         @foreach ($packages as $package)
-                                            <div class="col-12 col-md-4 col-lg-3">
+                                            <div class="col-12 col-md-6 col-lg-4 cater-data">
                                                 <div class="card">
                                                     <img src="{{ $package->image }}" class="card-img-top"
                                                         alt="Catering Image" style="height: 250px">
                                                     <div class="card-body">
                                                         <h5 class="card-title">{{ $package->name }}</h5>
-                                                        <p class="card-text fw-bold">Inclusions:</p>
+                                                        <p class="card-text fw-bold">Inclusions: <button
+                                                                class="rounded bg-success cater-edit-inclusion"
+                                                                value="{{ $package->id }}"
+                                                                style="border: 1px solid transparent;">
+                                                                <i class="mdi mdi-pencil text-white"></i>
+                                                            </button></p>
                                                         <ul class="row list-unstyled ">
                                                             @foreach ($package->inclusion as $inc)
-                                                                <li class="col-6">{{ $inc }} <i
-                                                                        class="fa fa-check-circle"></i></li>
+                                                                <li class="col-4"><small>{{ $inc }} <i
+                                                                            class="fa fa-check-circle text-success"></i></small>
+                                                                </li>
                                                             @endforeach
                                                         </ul>
-                                                        <p class="card-text"><small class="text-muted">Price:
-                                                                P{{ $package->price }}</small>
-                                                        </p>
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <h5 class="card-text fw-bolder">Price:
+                                                                P{{ number_format($package->price, 2) }}
+                                                            </h5>
+                                                            <div class=" gap-1 cater-button" style="display: none;">
+                                                                <button class="rounded bg-success cater-edit"
+                                                                    value="{{ $package->id }}"
+                                                                    style="border: 1px solid transparent;">
+                                                                    <i class="mdi mdi-pencil text-white"></i>
+                                                                </button>
+
+                                                                <button class="rounded bg-danger cater-delete"
+                                                                    value="{{ $package->id }}"
+                                                                    style="border: 1px solid transparent;">
+                                                                    <i class="mdi mdi-delete text-white"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -69,4 +90,5 @@
     </div>
 
     <x-add-package />
+    <x-update-package />
 @endsection

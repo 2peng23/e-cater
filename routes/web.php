@@ -42,9 +42,13 @@ Route::middleware('auth')->group(function () {
         Route::post('add-stock', [AdminController::class, 'addStock'])->name('add-stock');
         Route::get('cake-info', [AdminController::class, 'cakeInfo'])->name('cake-info');
         Route::post('update-cake', [AdminController::class, 'updateCake'])->name('update-cake');
+        Route::get('delete-cake', [AdminController::class, 'deleteCake'])->name('delete-cake');
         // catering
         Route::get('catering', [AdminController::class, 'catering'])->name('catering');
         Route::post('add-package', [AdminController::class, 'addPackage'])->name('add-package');
+        Route::get('edit-cater', [AdminController::class, 'editCater'])->name('edit-cater');
+        Route::post('update-package', [AdminController::class, 'updatePackage'])->name('update-package');
+        Route::get('delete-cater', [AdminController::class, 'deleteCater'])->name('delete-cater');
     });
     // user
     Route::middleware('auth')->group(function () {

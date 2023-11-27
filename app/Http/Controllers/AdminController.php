@@ -138,6 +138,16 @@ class AdminController extends Controller
         ]);
     }
 
+    public function deleteCake(Request $request)
+    {
+        $id = $request->id;
+        $cake = Cake::find($id);
+        $cake->delete();
+        return response()->json([
+            'error' => "Cake deleted!"
+        ]);
+    }
+
 
     // catering
     public function catering()
@@ -164,6 +174,44 @@ class AdminController extends Controller
         $package->save();
         return response()->json([
             'success' => "Package added!"
+        ]);
+    }
+    public function editCater(Request $request)
+    {
+        $id = $request->id;
+        $cater = Package::find($id);
+        return response()->json([
+            'package' => $cater
+        ]);
+    }
+    public function updatePackage(Request $request)
+    {
+        $id = $request->edit_id;
+        $package = Package::find($id);
+        $package->name = $request->edit_name;
+        $package->price = $request->edit_price;
+        $photo = $request->edit_image;
+        if ($photo) {
+            $photoname = $photo->getClientOriginalName();
+
+            // Move the uploaded image to the specified directory
+            $photo->move(public_path('images/package'), $photoname);
+
+            // Save the image path to the database
+            $package->image = 'images/package/' . $photoname;
+        }
+        $package->save();
+        return response()->json([
+            'success' => 'Package updated!'
+        ]);
+    }
+    public function deleteCater(Request $request)
+    {
+        $id = $request->id;
+        $package = Package::find($id);
+        $package->delete();
+        return response()->json([
+            'error' => "Package deleted!"
         ]);
     }
 }

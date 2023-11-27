@@ -215,6 +215,34 @@ $(document).on("click", ".info-cake-btn", function () {
     });
 });
 // edit cake
+$(document).on("click", ".delete-cake-btn", function () {
+    console.log("click");
+    var id = $(this).val();
+    if (confirm("Delete this cake?")) {
+        $.ajax({
+            url: "/delete-cake",
+            type: "get",
+            data: { id: id },
+            success: function (res) {
+                if (res.success) {
+                    $("#success-modal").modal("show");
+                    $("#success-message").html(res.success);
+                    $("#all-data").load(window.location.href + " #all-data");
+                } else {
+                    $("#all-data").load(window.location.href + " #all-data");
+                    $("#error-modal").modal("show");
+                    $("#error-message").html(res.error);
+                }
+                // If you want to hide a success message after 1.5 seconds, uncomment the following lines
+                setTimeout(function () {
+                    $("#success-modal").modal("hide");
+                    $("#error-modal").modal("hide");
+                }, 2000);
+            },
+        });
+    }
+});
+// edit cake
 $(document).on("click", ".edit-cake-btn", function () {
     console.log("click");
     var id = $(this).val();
@@ -478,4 +506,112 @@ $(document).on("submit", "#add-package-form", function (e) {
             }, 2000);
         },
     });
+});
+// toggle buttons
+$(document).on("mouseover", ".cater-data", function () {
+    var buttons = $(this).find(".cater-button");
+    buttons.show();
+});
+$(document).on("mouseout", ".cater-data", function () {
+    var buttons = $(this).find(".cater-button");
+    buttons.hide();
+});
+// edit cater package
+$(document).on("click", ".cater-edit", function () {
+    var id = $(this).val();
+    $("#update-package").modal("show");
+    console.log(id);
+    $.ajax({
+        url: "/edit-cater",
+        type: "get",
+        data: { id: id },
+        success: function (res) {
+            var data = res.package;
+            $("#edit_id").val(id);
+            $("#edit_name").val(data.name);
+            $("#edit_price").val(data.price);
+            var initialImageUrl = data.image;
+            // Set the initial value
+            $("#update_image_preview").attr("src", initialImageUrl);
+
+            // Add an event listener for changes
+            var imageInput = $("#edit_image");
+
+            imageInput.on("change", function () {
+                var imageUrl = URL.createObjectURL(this.files[0]);
+                $("#update_image_preview").attr("src", imageUrl);
+            });
+        },
+    });
+});
+//submit update package
+$(document).on("submit", "#update-package-form", function (e) {
+    e.preventDefault();
+    // Get the form data
+    var formData = new FormData(this);
+    $.ajax({
+        url: "/update-package",
+        type: "post",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (res) {
+            // Reset the form
+            $("#update-package-form")[0].reset();
+            if (res.success) {
+                $("#success-modal").modal("show");
+                $("#success-message").html(res.success);
+                $("#update-package").modal("hide");
+                $("#all-data").load(window.location.href + " #all-data");
+            } else {
+                $("#error-modal").modal("show");
+                $("#error-message").html(res.error);
+            }
+            // If you want to hide a success message after 1.5 seconds, uncomment the following lines
+            setTimeout(function () {
+                $("#success-modal").modal("hide");
+                $("#error-modal").modal("hide");
+            }, 2000);
+        },
+        error: function (xhr, status, error) {
+            // If you want to handle errors and display error messages, uncomment the following lines
+            var errors = xhr.responseJSON.errors;
+            var errorString = "";
+            $.each(errors, function (key, value) {
+                errorString += value + "<br>";
+            });
+            $("#error-modal").modal("show");
+            $("#error-message").html(errorString);
+            setTimeout(function () {
+                $("#error-modal").modal("hide");
+            }, 2000);
+        },
+    });
+});
+// delete cater package
+$(document).on("click", ".cater-delete", function () {
+    var id = $(this).val();
+    console.log(id);
+    if (confirm("Delete this package?")) {
+        $.ajax({
+            url: "/delete-cater",
+            type: "get",
+            data: { id: id },
+            success: function (res) {
+                if (res.success) {
+                    $("#success-modal").modal("show");
+                    $("#success-message").html(res.success);
+                } else {
+                    $("#error-modal").modal("show");
+                    $("#error-message").html(res.error);
+                    $("#all-data").load(window.location.href + " #all-data");
+                }
+                // If you want to hide a success message after 1.5 seconds, uncomment the following lines
+                setTimeout(function () {
+                    $("#success-modal").modal("hide");
+                    $("#error-modal").modal("hide");
+                }, 2000);
+            },
+        });
+    }
 });

@@ -59,7 +59,7 @@
                                                                 <button class="btn btn-stock"
                                                                     value="{{ $cake->id }}">{{ $cake->stock }}</button>
                                                             </td>
-                                                            <td>{{ $cake->price }}</td>
+                                                            <td>P{{ number_format($cake->price, 2) }}</td>
                                                             <td>
                                                                 @if ($cake->stock > 0)
                                                                     <div class="badge badge-opacity-success">
@@ -78,6 +78,10 @@
                                                                     value="{{ $cake->id }}">
                                                                     <i
                                                                         class="mdi mdi-circle-edit-outline text-success fs-6"></i>
+                                                                </button>
+                                                                <button class="btn delete-cake-btn"
+                                                                    value="{{ $cake->id }}">
+                                                                    <i class="mdi mdi-delete-circle text-danger fs-6"></i>
                                                                 </button>
                                                             </td>
                                                         </tr>

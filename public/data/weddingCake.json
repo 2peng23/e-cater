@@ -25,131 +25,6 @@
         
     },
     {
-        "category" : "Wedding Cakes",
-        "image" : "images/cake/Wedding Cakes/6.png"
-        
-    },
-    {
-        "category" : "Wedding Cakes",
-        "image" : "images/cake/Wedding Cakes/7.png"
-        
-    },
-    {
-        "category" : "Wedding Cakes",
-        "image" : "images/cake/Wedding Cakes/8.png"
-        
-    },
-    {
-        "category" : "Wedding Cakes",
-        "image" : "images/cake/Wedding Cakes/9.png"
-        
-    },
-    {
-        "category" : "Wedding Cakes",
-        "image" : "images/cake/Wedding Cakes/10.png"
-        
-    },
-    {
-        "category" : "Wedding Cakes",
-        "image" : "images/cake/Wedding Cakes/11.png"
-        
-    },
-    {
-        "category" : "Wedding Cakes",
-        "image" : "images/cake/Wedding Cakes/12.png"
-        
-    },
-    {
-        "category" : "Wedding Cakes",
-        "image" : "images/cake/Wedding Cakes/13.png"
-        
-    },
-    {
-        "category" : "Wedding Cakes",
-        "image" : "images/cake/Wedding Cakes/14.png"
-        
-    },
-    {
-        "category" : "Wedding Cakes",
-        "image" : "images/cake/Wedding Cakes/15.png"
-        
-    },
-    {
-        "category" : "Wedding Cakes",
-        "image" : "images/cake/Wedding Cakes/16.png"
-        
-    },
-    {
-        "category" : "Wedding Cakes",
-        "image" : "images/cake/Wedding Cakes/17.png"
-        
-    },
-    {
-        "category" : "Wedding Cakes",
-        "image" : "images/cake/Wedding Cakes/18.png"
-        
-    },
-    {
-        "category" : "Wedding Cakes",
-        "image" : "images/cake/Wedding Cakes/19.png"
-        
-    },
-    {
-        "category" : "Wedding Cakes",
-        "image" : "images/cake/Wedding Cakes/20.png"
-        
-    },
-    {
-        "category" : "Wedding Cakes",
-        "image" : "images/cake/Wedding Cakes/21.png"
-        
-    },
-    {
-        "category" : "Wedding Cakes",
-        "image" : "images/cake/Wedding Cakes/22.png"
-        
-    },
-    {
-        "category" : "Wedding Cakes",
-        "image" : "images/cake/Wedding Cakes/23.png"
-        
-    },
-    {
-        "category" : "Wedding Cakes",
-        "image" : "images/cake/Wedding Cakes/24.png"
-        
-    },
-    {
-        "category" : "Wedding Cakes",
-        "image" : "images/cake/Wedding Cakes/25.png"
-        
-    },
-    {
-        "category" : "Wedding Cakes",
-        "image" : "images/cake/Wedding Cakes/26.png"
-        
-    },
-    {
-        "category" : "Wedding Cakes",
-        "image" : "images/cake/Wedding Cakes/27.png"
-        
-    },
-    {
-        "category" : "Wedding Cakes",
-        "image" : "images/cake/Wedding Cakes/28.png"
-        
-    },
-    {
-        "category" : "Wedding Cakes",
-        "image" : "images/cake/Wedding Cakes/29.png"
-        
-    },
-    {
-        "category" : "Wedding Cakes",
-        "image" : "images/cake/Wedding Cakes/30.png"
-        
-    },
-    {
         "category" : "Drip Cakes",
         "image" : "images/cake/Drip Cakes/1.png"
         
@@ -172,56 +47,6 @@
     {
         "category" : "Drip Cakes",
         "image" : "images/cake/Drip Cakes/5.png"
-        
-    },
-    {
-        "category" : "Drip Cakes",
-        "image" : "images/cake/Drip Cakes/6.png"
-        
-    },
-    {
-        "category" : "Drip Cakes",
-        "image" : "images/cake/Drip Cakes/7.png"
-        
-    },
-    {
-        "category" : "Drip Cakes",
-        "image" : "images/cake/Drip Cakes/8.png"
-        
-    },
-    {
-        "category" : "Drip Cakes",
-        "image" : "images/cake/Drip Cakes/9.png"
-        
-    },
-    {
-        "category" : "Drip Cakes",
-        "image" : "images/cake/Drip Cakes/10.png"
-        
-    },
-    {
-        "category" : "Drip Cakes",
-        "image" : "images/cake/Drip Cakes/11.png"
-        
-    },
-    {
-        "category" : "Drip Cakes",
-        "image" : "images/cake/Drip Cakes/12.png"
-        
-    },
-    {
-        "category" : "Drip Cakes",
-        "image" : "images/cake/Drip Cakes/13.png"
-        
-    },
-    {
-        "category" : "Drip Cakes",
-        "image" : "images/cake/Drip Cakes/14.png"
-        
-    },
-    {
-        "category" : "Drip Cakes",
-        "image" : "images/cake/Drip Cakes/15.png"
         
     },
     {
@@ -250,31 +75,6 @@
         
     },
     {
-        "category" : "Floral Cakes",
-        "image" : "images/cake/Floral Cakes/6.png"
-        
-    },
-    {
-        "category" : "Floral Cakes",
-        "image" : "images/cake/Floral Cakes/7.png"
-        
-    },
-    {
-        "category" : "Floral Cakes",
-        "image" : "images/cake/Floral Cakes/8.png"
-        
-    },
-    {
-        "category" : "Floral Cakes",
-        "image" : "images/cake/Floral Cakes/9.png"
-        
-    },
-    {
-        "category" : "Floral Cakes",
-        "image" : "images/cake/Floral Cakes/10.png"
-        
-    },
-    {
         "category" : "Fondant Cakes",
         "image" : "images/cake/Fondant Cakes/1.png"
         
@@ -297,36 +97,6 @@
     {
         "category" : "Fondant Cakes",
         "image" : "images/cake/Fondant Cakes/5.png"
-        
-    },
-    {
-        "category" : "Fondant Cakes",
-        "image" : "images/cake/Fondant Cakes/6.png"
-        
-    },
-    {
-        "category" : "Fondant Cakes",
-        "image" : "images/cake/Fondant Cakes/7.png"
-        
-    },
-    {
-        "category" : "Fondant Cakes",
-        "image" : "images/cake/Fondant Cakes/8.png"
-        
-    },
-    {
-        "category" : "Fondant Cakes",
-        "image" : "images/cake/Fondant Cakes/9.png"
-        
-    },
-    {
-        "category" : "Fondant Cakes",
-        "image" : "images/cake/Fondant Cakes/10.png"
-        
-    },
-    {
-        "category" : "Fondant Cakes",
-        "image" : "images/cake/Fondant Cakes/11.png"
         
     },
     {
@@ -355,41 +125,6 @@
         
     },
     {
-        "category" : "Minimalist Cakes",
-        "image" : "images/cake/Minimalist Cakes/6.png"
-        
-    },
-    {
-        "category" : "Minimalist Cakes",
-        "image" : "images/cake/Minimalist Cakes/7.png"
-        
-    },
-    {
-        "category" : "Minimalist Cakes",
-        "image" : "images/cake/Minimalist Cakes/8.png"
-        
-    },
-    {
-        "category" : "Minimalist Cakes",
-        "image" : "images/cake/Minimalist Cakes/9.png"
-        
-    },
-    {
-        "category" : "Minimalist Cakes",
-        "image" : "images/cake/Minimalist Cakes/10.png"
-        
-    },
-    {
-        "category" : "Minimalist Cakes",
-        "image" : "images/cake/Minimalist Cakes/11.png"
-        
-    },
-    {
-        "category" : "Minimalist Cakes",
-        "image" : "images/cake/Minimalist Cakes/12.png"
-        
-    },
-    {
         "category" : "Money Cakes",
         "image" : "images/cake/Money Cakes/1.png"
         
@@ -412,31 +147,6 @@
     {
         "category" : "Money Cakes",
         "image" : "images/cake/Money Cakes/5.png"
-        
-    },
-    {
-        "category" : "Money Cakes",
-        "image" : "images/cake/Money Cakes/6.png"
-        
-    },
-    {
-        "category" : "Money Cakes",
-        "image" : "images/cake/Money Cakes/7.png"
-        
-    },
-    {
-        "category" : "Money Cakes",
-        "image" : "images/cake/Money Cakes/8.png"
-        
-    },
-    {
-        "category" : "Money Cakes",
-        "image" : "images/cake/Money Cakes/9.png"
-        
-    },
-    {
-        "category" : "Money Cakes",
-        "image" : "images/cake/Money Cakes/10.png"
         
     },
     {
@@ -478,80 +188,5 @@
         "category" : "Themed Cakes",
         "image" : "images/cake/Themed Cakes/5.png"
         
-    },
-    {
-        "category" : "Themed Cakes",
-        "image" : "images/cake/Themed Cakes/6.png"
-        
-    },
-    {
-        "category" : "Themed Cakes",
-        "image" : "images/cake/Themed Cakes/7.png"
-        
-    },
-    {
-        "category" : "Themed Cakes",
-        "image" : "images/cake/Themed Cakes/8.png"
-        
-    },
-    {
-        "category" : "Themed Cakes",
-        "image" : "images/cake/Themed Cakes/9.png"
-        
-    },
-    {
-        "category" : "Themed Cakes",
-        "image" : "images/cake/Themed Cakes/10.png"
-        
-    },
-    {
-        "category" : "Themed Cakes",
-        "image" : "images/cake/Themed Cakes/11.png"
-        
-    },
-    {
-        "category" : "Themed Cakes",
-        "image" : "images/cake/Themed Cakes/12.png"
-        
-    },
-    {
-        "category" : "Themed Cakes",
-        "image" : "images/cake/Themed Cakes/13.png"
-        
-    },
-    {
-        "category" : "Themed Cakes",
-        "image" : "images/cake/Themed Cakes/14.png"
-        
-    },
-    {
-        "category" : "Themed Cakes",
-        "image" : "images/cake/Themed Cakes/15.png"
-        
-    },
-    {
-        "category" : "Themed Cakes",
-        "image" : "images/cake/Themed Cakes/16.png"
-        
-    },
-    {
-        "category" : "Themed Cakes",
-        "image" : "images/cake/Themed Cakes/17.png"
-        
-    },
-    {
-        "category" : "Themed Cakes",
-        "image" : "images/cake/Themed Cakes/18.png"
-        
-    },
-    {
-        "category" : "Themed Cakes",
-        "image" : "images/cake/Themed Cakes/19.png"
-        
-    },
-    {
-        "category" : "Themed Cakes",
-        "image" : "images/cake/Themed Cakes/20.png"
-        
-    }   
+    }
 ]
