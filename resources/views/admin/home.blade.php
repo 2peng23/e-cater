@@ -38,9 +38,9 @@
                                     <div class="d-flex justify-content-between ">
                                         <p class="fw-bold fs-3 text-white">
                                             @php
-                                                $cake = App\Models\Cake::count();
+                                                $package = App\Models\Package::count();
                                             @endphp
-                                            {{ $cake }}
+                                            {{ $package }}
                                         </p>
 
                                         <img src="content/logo/decor.svg" alt=""

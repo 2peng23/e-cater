@@ -521,6 +521,28 @@ $(document).on("click", ".cater-edit", function () {
     var id = $(this).val();
     $("#update-package").modal("show");
     console.log(id);
+    let inclusionCount = 1;
+    // Add Inclusion button click event
+    $("#edit_add-inclusion").on("click", function (e) {
+        e.preventDefault();
+        inclusionCount++;
+
+        // Clone the original inclusion input and update attributes
+        let newInclusionInput = $("#edit_inclusion1").clone();
+        newInclusionInput
+            .attr({
+                id: "edit_inclusion" + inclusionCount,
+                name: "edit_inclusion[]",
+            })
+            .val("");
+        // Create a new div with class "my-1 form-control"
+        let newDiv = $("<div>").addClass("mb-2 col-6");
+        // Append the new inclusion input to the new div
+        newDiv.append(newInclusionInput);
+
+        // Append the new inclusion input to the container
+        $("#edit_inc-container").append(newDiv);
+    });
     $.ajax({
         url: "/edit-cater",
         type: "get",
@@ -614,4 +636,45 @@ $(document).on("click", ".cater-delete", function () {
             },
         });
     }
+});
+// edit cater inclusion
+$(document).on("click", ".cater-edit-inclusion", function () {
+    console.log("click");
+
+    // Find the closest <ul> to the clicked button
+    var $ul = $(this).closest("p").next("ul");
+
+    // Toggle classes for each <i> element within the <ul>
+    $ul.find(".cater-delete-inclusion").toggle();
+});
+// delete inclusion
+$(document).on("click", ".cater-delete-inclusion", function () {
+    var id = $(this).val();
+    var index = $(this).data("index");
+    console.log(index);
+    console.log(id);
+    $.ajax({
+        url: "/delete-inclusion",
+        data: {
+            id: id,
+            index: index,
+        },
+        type: "get",
+        success: function (result) {
+            console.log(result);
+            if (result.success) {
+                $("#success-modal").modal("show");
+                $("#success-message").html(result.success);
+            } else {
+                $("#error-modal").modal("show");
+                $("#error-message").html(result.error);
+                $("#all-data").load(window.location.href + " #all-data");
+            }
+            // If you want to hide a success message after 1.5 seconds, uncomment the following lines
+            setTimeout(function () {
+                $("#success-modal").modal("hide");
+                $("#error-modal").modal("hide");
+            }, 2000);
+        },
+    });
 });

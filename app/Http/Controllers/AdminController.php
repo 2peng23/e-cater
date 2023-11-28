@@ -190,6 +190,14 @@ class AdminController extends Controller
         $package = Package::find($id);
         $package->name = $request->edit_name;
         $package->price = $request->edit_price;
+        $newInclusions = $request->edit_inclusion;
+        $existingInclusions = $package->inclusion;
+
+        if ($newInclusions) {
+            // Use array_merge to combine the arrays
+            $combinedInclusions = array_merge($existingInclusions, $newInclusions);
+            $package->inclusion = $combinedInclusions;
+        }
         $photo = $request->edit_image;
         if ($photo) {
             $photoname = $photo->getClientOriginalName();
@@ -213,5 +221,26 @@ class AdminController extends Controller
         return response()->json([
             'error' => "Package deleted!"
         ]);
+    }
+    public function deleteInclusion(Request $request)
+    {
+        $id = $request->id;
+        $index = $request->index;
+
+        $package = Package::find($id);
+
+        $inclusions = $package->inclusion;
+
+
+        // Delete the inclusion at the specified index
+        unset($inclusions[$index]);
+
+        // Reindex the array to maintain consecutive keys
+        $inclusions = array_values($inclusions);
+
+        // Update the package with the modified inclusions
+        $package->update(['inclusion' => $inclusions]);
+
+        return response()->json(['error' => 'Deleted']);
     }
 }

@@ -49,6 +49,7 @@ Route::middleware('auth')->group(function () {
         Route::get('edit-cater', [AdminController::class, 'editCater'])->name('edit-cater');
         Route::post('update-package', [AdminController::class, 'updatePackage'])->name('update-package');
         Route::get('delete-cater', [AdminController::class, 'deleteCater'])->name('delete-cater');
+        Route::get('delete-inclusion', [AdminController::class, 'deleteInclusion'])->name('delete-inclusion');
     });
     // user
     Route::middleware('auth')->group(function () {

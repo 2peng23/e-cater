@@ -48,16 +48,30 @@
                                                                 <i class="mdi mdi-pencil text-white"></i>
                                                             </button></p>
                                                         <ul class="row list-unstyled ">
-                                                            @foreach ($package->inclusion as $inc)
-                                                                <li class="col-4"><small>{{ $inc }} <i
-                                                                            class="fa fa-check-circle text-success"></i></small>
+                                                            @foreach ($package->inclusion as $index => $inc)
+                                                                <li class="col-4 mb-1">
+                                                                    <p class="card-text">{{ $inc }}
+                                                                        <button class="rounded cater-delete-inclusion"
+                                                                            value="{{ $package->id }}"
+                                                                            data-index="{{ $index }}"
+                                                                            style="border: 1px solid transparent;display:none">
+                                                                            <i class="fa fa-times-circle text-danger"></i>
+                                                                        </button>
+                                                                    </p>
                                                                 </li>
                                                             @endforeach
                                                         </ul>
                                                         <div class="d-flex justify-content-between align-items-center">
-                                                            <h5 class="card-text fw-bolder">Price:
-                                                                P{{ number_format($package->price, 2) }}
-                                                            </h5>
+                                                            <div>
+                                                                <h5>
+                                                                    Quantity:
+                                                                    <button
+                                                                        class="btn add-cater-stock">{{ $package->quantity }}</button>
+                                                                </h5>
+                                                                <h5 class="card-text fw-bolder">Price:
+                                                                    P{{ number_format($package->price, 2) }}
+                                                                </h5>
+                                                            </div>
                                                             <div class=" gap-1 cater-button" style="display: none;">
                                                                 <button class="rounded bg-success cater-edit"
                                                                     value="{{ $package->id }}"

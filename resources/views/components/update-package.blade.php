@@ -24,6 +24,19 @@
                         <input type="file" class="form-control" name="edit_image" accept="image/*" id="edit_image">
                     </div>
                     <div class="m-2">
+                        <label for="edit_inclusion" class="form-label">Inclusion<span
+                                class="text-danger">*</span></label>
+                        <div class="row" id="edit_inc-container">
+                            <div class="col-6 mb-2">
+                                <input type="text" class="form-control" name="edit_inclusion[]" id="edit_inclusion1">
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button class="rounded-circle bg-primary text-white" id="edit_add-inclusion"><i
+                                    class="fa fa-plus "></i></button>
+                        </div>
+                    </div>
+                    <div class="m-2">
                         <label for="edit_price" class="form-label"> Price <span class="text-danger">*</span></label>
                         <input type="number" class="form-control" name="edit_price" id="edit_price" required>
                     </div>
