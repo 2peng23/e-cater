@@ -13,5 +13,5 @@
     @include('default.service')
 
 
-    {{-- @include('default.feature2') --}}
+    @include('default.feature2')
 @endsection

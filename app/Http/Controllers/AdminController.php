@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cake;
 use App\Models\Category;
+use App\Models\CaterStock;
 use App\Models\Package;
 use App\Models\Stock;
 use Illuminate\Http\Request;
@@ -242,5 +243,31 @@ class AdminController extends Controller
         $package->update(['inclusion' => $inclusions]);
 
         return response()->json(['error' => 'Deleted']);
+    }
+    public function editCaterStock(Request $request)
+    {
+        $id = $request->id;
+        $cater = Package::find($id);
+        return response()->json([
+            'cater' => $cater
+        ]);
+    }
+    public function addCaterStock(Request $request)
+    {
+        $id = $request->cater_id;
+        $cater = Package::find($id);
+        $cater->quantity += $request->stock;
+        $cater->save();
+
+
+        $stock = new CaterStock();
+        $stock->item_id = $request->cater_id;
+        $stock->beginning_stock = $request->beginning_stock;
+        $stock->ending_stock = $request->ending_stock;
+        $stock->quantity = $request->stock;
+        $stock->save();
+        return response()->json([
+            'success' => "Stock updated!"
+        ]);
     }
 }

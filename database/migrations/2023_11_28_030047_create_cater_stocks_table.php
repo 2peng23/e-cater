@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('quantity')->default(0);
             $table->string('beginning_stock')->default(0);
             $table->string('ending_stock')->default(0);
-            $table->string('sale_quantity')->default(0);
+            $table->string('rental_quantity')->default(0);
             $table->timestamps();
         });
     }

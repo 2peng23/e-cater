@@ -678,3 +678,126 @@ $(document).on("click", ".cater-delete-inclusion", function () {
         },
     });
 });
+// add-cater-stock
+$(document).on("click", ".add-cater-stock", function () {
+    $("#add-cater-stock").modal("show");
+    var id = $(this).val();
+    $.ajax({
+        url: "/edit-cater-stock",
+        data: { id: id },
+        type: "get",
+        success: function (res) {
+            console.log(res.cater);
+            $("#cater_id").val(id);
+            $("#beginning_stock").val(res.cater.quantity);
+
+            var value = 0; // Initialize value to 0
+
+            // Function to update #all_stock
+            function updateAllStock() {
+                // Use parseFloat to handle cases where res.cake.stock is a string
+                var currentStock = parseFloat(res.cater.quantity) || 0;
+                $("#ending_stock").val(currentStock + value);
+            }
+
+            $("#stock").on("input", function (e) {
+                value = parseInt(e.target.value) || 0; // Parse the value as an integer or default to 0
+                updateAllStock(); // Call a function to update #all_stock
+            });
+
+            // Initial update
+            updateAllStock();
+        },
+    });
+});
+// update-cater--stock
+$(document).on("submit", "#add-cater-stock-form", function (e) {
+    e.preventDefault();
+    // Get the form data
+    var formData = $(this).serialize();
+    $.ajax({
+        url: "/add-cater-stock",
+        type: "post",
+        data: formData,
+        success: function (res) {
+            // Reset the form
+            $("#add-cater-stock-form")[0].reset();
+            if (res.success) {
+                $("#success-modal").modal("show");
+                $("#success-message").html(res.success);
+                $("#add-cater-stock").modal("hide");
+                $("#all-data").load(window.location.href + " #all-data");
+            } else {
+                $("#error-modal").modal("show");
+                $("#error-message").html(res.error);
+            }
+            // If you want to hide a success message after 1.5 seconds, uncomment the following lines
+            setTimeout(function () {
+                $("#success-modal").modal("hide");
+                $("#error-modal").modal("hide");
+            }, 2000);
+        },
+        error: function (xhr, status, error) {
+            // If you want to handle errors and display error messages, uncomment the following lines
+            var errors = xhr.responseJSON.errors;
+            var errorString = "";
+            $.each(errors, function (key, value) {
+                errorString += value + "<br>";
+            });
+            $("#error-modal").modal("show");
+            $("#error-message").html(errorString);
+            setTimeout(function () {
+                $("#error-modal").modal("hide");
+            }, 2000);
+        },
+    });
+});
+
+// user cater
+
+$(document).on("click", ".cater-info-btn", function () {
+    var id = $(this).val();
+    $("#info-cater").offcanvas("show");
+    $.ajax({
+        url: "/cater-information",
+        data: { id: id },
+        type: "get",
+        success: function (res) {
+            console.log(res.cater);
+            var data = res.cater;
+            $(".package_name").html(data.name);
+            // Assuming data.price is a number
+            var formattedPrice = new Intl.NumberFormat("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+            }).format(data.price);
+
+            $("#package_price").html(formattedPrice);
+
+            var inc = data.inclusion;
+            var ul = $("#inc-list");
+
+            // Clear the existing content of the ul
+            ul.empty();
+
+            // Iterate through the 'inc' array and append each element to the ul
+            for (var i = 0; i < inc.length; i++) {
+                // Create a new <li> element
+                var listItem = $("<li>");
+                listItem.addClass("col-6");
+
+                // Set the text content of the <li> to the array element
+                listItem.text(inc[i]);
+
+                // Create an <i> element with the specified classes
+                var icon = $("<i>").addClass("fa fa-check-circle text-success");
+
+                // Add a space before appending the <i> element to the <li>
+                listItem.append(" ").append(icon);
+
+                // Append the list item to the ul
+                ul.append(listItem);
+            }
+        },
+    });
+});

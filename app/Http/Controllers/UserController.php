@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cake;
 use App\Models\Cart;
+use App\Models\Package;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -83,6 +84,14 @@ class UserController extends Controller
         $cart->delete();
         return response()->json([
             'error' => 'Deleted!'
+        ]);
+    }
+    public function caterInfo(Request $request)
+    {
+        $id = $request->id;
+        $cater = Package::find($id);
+        return response()->json([
+            'cater' => $cater
         ]);
     }
 }

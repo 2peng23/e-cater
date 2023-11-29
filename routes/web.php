@@ -50,6 +50,8 @@ Route::middleware('auth')->group(function () {
         Route::post('update-package', [AdminController::class, 'updatePackage'])->name('update-package');
         Route::get('delete-cater', [AdminController::class, 'deleteCater'])->name('delete-cater');
         Route::get('delete-inclusion', [AdminController::class, 'deleteInclusion'])->name('delete-inclusion');
+        Route::get('edit-cater-stock', [AdminController::class, 'editCaterStock'])->name('edit-cater-stock');
+        Route::post('add-cater-stock', [AdminController::class, 'addCaterStock'])->name('add-cater-stock');
     });
     // user
     Route::middleware('auth')->group(function () {
@@ -59,6 +61,10 @@ Route::middleware('auth')->group(function () {
         Route::get('remove-cart', [UserController::class, 'removeCart'])->name('add-quantity');
     });
 });
+
+
+// For all
+Route::get('cater-information', [UserController::class, 'caterInfo'])->name('cater-information');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

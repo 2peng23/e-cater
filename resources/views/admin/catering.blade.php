@@ -65,7 +65,7 @@
                                                             <div>
                                                                 <h5>
                                                                     Quantity:
-                                                                    <button
+                                                                    <button value="{{ $package->id }}"
                                                                         class="btn add-cater-stock">{{ $package->quantity }}</button>
                                                                 </h5>
                                                                 <h5 class="card-text fw-bolder">Price:
@@ -105,4 +105,5 @@
 
     <x-add-package />
     <x-update-package />
+    <x-add-cater-stock />
 @endsection
