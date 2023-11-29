@@ -10,7 +10,8 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0" id="navBar">
-            <a href="/" class="nav-item nav-link active">Home</a>
+            <a href="/"
+                class="nav-item nav-link  {{ request()->routeIs('my-cake-orders', 'my-rentals') ? '' : 'active' }}">Home</a>
             <a href="#about-section" class="nav-item nav-link">About</a>
             <a @if (request()->routeIs('cart-items')) href="dashboard/#cake-section"
             @else
@@ -28,16 +29,34 @@
                 </div>
             </div> --}}
             @if (Auth::check())
-                <a href="{{ route('cart-items') }}"
-                    class="nav-item nav-link position-relative {{ request()->routeIs('cart-items') ? 'active' : '' }}">
-                    <p class="position-absolute fw-bolder" style="top: 5px; right:0">
-                        @php
-                            $cart_count = App\Models\Cart::where('cart_id', Auth::user()->id)->count();
-                        @endphp
-                        {{ $cart_count }}
-                    </p>
-                    <i class="fa fa-shopping-cart fs-4 text-primary"></i>
-                </a>
+                <div class="nav-item dropdown">
+                    <a href="#"
+                        class="nav-link dropdown-toggle {{ request()->routeIs('my-cake-orders', 'my-rentals') ? 'active' : '' }}"
+                        data-bs-toggle="dropdown">Order &
+                        Rental</a>
+                    <div class="dropdown-menu fade-up m-0">
+                        <a href="{{ route('my-cake-orders') }}"
+                            class="dropdown-item position-relative {{ request()->routeIs('my-cake-orders') ? 'active' : '' }}">
+                            <p class="position-absolute fw-bolder" style="top: 5px; right:0">
+                                @php
+                                    $cart_count = App\Models\Cart::where('cart_id', Auth::user()->id)->count();
+                                @endphp
+                                {{ $cart_count }}
+                            </p>
+                            Cake Order
+                        </a>
+                        <a href="{{ route('my-rentals') }}"
+                            class="dropdown-item position-relative {{ request()->routeIs('my-rentals') ? 'active' : '' }}">
+                            <p class="position-absolute fw-bolder" style="top: 5px; right:0">
+                                @php
+                                    $rents = App\Models\CaterCart::where('cart_id', Auth::user()->id)->count();
+                                @endphp
+                                {{ $rents }}
+                            </p>
+                            Rental
+                        </a>
+                    </div>
+                </div>
                 <div class="nav-item nav-link " style="border-radius: 50%">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf

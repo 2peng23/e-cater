@@ -801,3 +801,73 @@ $(document).on("click", ".cater-info-btn", function () {
         },
     });
 });
+//submit add cart
+$(document).on("submit", "#add-cater-cart-form", function (e) {
+    e.preventDefault();
+    // Get the form data
+    var formData = $(this).serialize();
+    $.ajax({
+        url: "/add-cater-cart",
+        type: "post",
+        data: formData,
+        success: function (res) {
+            // Reset the form
+            $("#add-cater-cart-form")[0].reset();
+            if (res.success) {
+                $("#success-modal").modal("show");
+                $("#success-message").html(res.success);
+                $("#navBar").load(window.location.href + " #navBar");
+            } else {
+                $("#error-modal").modal("show");
+                $("#error-message").html(res.error);
+            }
+            // If you want to hide a success message after 2 seconds, uncomment the following lines
+            setTimeout(function () {
+                $("#success-modal").modal("hide");
+                $("#error-modal").modal("hide");
+            }, 2000);
+        },
+        error: function (xhr, status, error) {
+            // If you want to handle errors and display error messages, uncomment the following lines
+            var errors = xhr.responseJSON.errors;
+            var errorString = "";
+            $.each(errors, function (key, value) {
+                errorString += value + "<br>";
+            });
+            $("#error-modal").modal("show");
+            $("#error-message").html(errorString);
+            setTimeout(function () {
+                $("#error-modal").modal("hide");
+            }, 2000);
+        },
+    });
+});
+// delete from cater cart
+$(document).on("click", ".remove-cater-cart", function () {
+    var id = $(this).val();
+    if (confirm("Remove item from rental?")) {
+        $.ajax({
+            url: "/remove-cater-cart",
+            data: { id: id },
+            type: "get",
+            success: function (res) {
+                // Reset the form
+                if (res.success) {
+                    $("#success-modal").modal("show");
+                    $("#success-message").html(res.success);
+                } else {
+                    $("#error-modal").modal("show");
+                    $("#error-message").html(res.error);
+                    $("#cart-section").load(
+                        window.location.href + " #cart-section"
+                    );
+                }
+                // If you want to hide a success message after 1.5 seconds, uncomment the following lines
+                setTimeout(function () {
+                    $("#success-modal").modal("hide");
+                    $("#error-modal").modal("hide");
+                }, 2000);
+            },
+        });
+    }
+});

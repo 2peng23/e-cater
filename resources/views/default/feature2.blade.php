@@ -15,6 +15,9 @@
                             <img class="img-fluid" src="{{ $item->image }}" alt="">
                         </div>
                         <div class="border border-5 border-light border-top-0">
+                            <div class="text-center fw-bold">
+                                {{ $item->name }}
+                            </div>
                             <div class="d-flex justify-content-between p-2 ">
                                 <div class="rounded-circle border align-items-center ">
                                     <p style="" class="mb-3 fw-bold px-3 pt-3">P<span
@@ -25,11 +28,11 @@
                                         class="fa fa-info-circle text-primary fs-4"></i></button>
                             </div>
                             @if (Auth::check())
-                                <form action="">
+                                <form action="{{ route('add-cater-cart') }}" method="POST" id="add-cater-cart-form">
                                     @csrf
                                     <div class="d-flex justify-content-end gap-2 mb-2 me-2">
-                                        <input type="number" class="form-control" min="0" name="quantity"
-                                            value="0" style="max-width: 50px">
+                                        <input type="hidden" name="cart_id" value="{{ Auth::user()->id }}">
+                                        <input type="hidden" name="item_id" value="{{ $item->id }}">
                                         <button class="btn btn-sm btn-primary " style="max-width: 95px">Rent</button>
                                     </div>
                                 </form>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cake;
 use App\Models\Cart;
+use App\Models\CaterCart;
 use App\Models\Package;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -92,6 +93,41 @@ class UserController extends Controller
         $cater = Package::find($id);
         return response()->json([
             'cater' => $cater
+        ]);
+    }
+    public function addCaterCart(Request $request)
+    {
+
+        $existing = CaterCart::where('item_id', $request->item_id)
+            ->where('cart_id', $request->cart_id)->first();
+        if ($existing) {
+            return response()->json([
+                'error' => "This package is already on your rental package!"
+            ]);
+        }
+        $cart = new CaterCart();
+        $cart->item_id = $request->item_id;
+        $cart->cart_id = $request->cart_id;
+        $cart->save();
+        return response()->json([
+            'success' => "Added to rental package!"
+        ]);
+    }
+    public function myRentals()
+    {
+        $carts = CaterCart::where('cart_id', Auth::user()->id)->get();
+        // $totalPrice = $this->calculateTotalPrice($carts);
+
+        return view('user.cater-cart', compact('carts'));
+    }
+
+    public function removeCaterCart(Request $request)
+    {
+        $id = $request->id;
+        $cart = CaterCart::find($id);
+        $cart->delete();
+        return response()->json([
+            'error' => 'Deleted!'
         ]);
     }
 }

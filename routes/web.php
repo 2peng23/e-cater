@@ -56,9 +56,15 @@ Route::middleware('auth')->group(function () {
     // user
     Route::middleware('auth')->group(function () {
         Route::post('add-cart', [UserController::class, 'addCart'])->name('add-cart');
-        Route::get('cart-items', [UserController::class, 'cartItems'])->name('cart-items');
+        Route::get('my-cake-orders', [UserController::class, 'cartItems'])->name('my-cake-orders');
         Route::get('add-quantity', [UserController::class, 'addQuantity'])->name('add-quantity');
-        Route::get('remove-cart', [UserController::class, 'removeCart'])->name('add-quantity');
+        Route::get('remove-cart', [UserController::class, 'removeCart'])->name('remove-cart');
+
+        // cater
+
+        Route::post('add-cater-cart', [UserController::class, 'addCaterCart'])->name('add-cater-cart');
+        Route::get('my-rentals', [UserController::class, 'myRentals'])->name('my-rentals');
+        Route::get('remove-cater-cart', [UserController::class, 'removeCaterCart'])->name('remove-cater-cart');
     });
 });
 
