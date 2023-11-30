@@ -127,7 +127,21 @@ class UserController extends Controller
         $cart = CaterCart::find($id);
         $cart->delete();
         return response()->json([
-            'error' => 'Deleted!'
+            'error' => 'Removed!'
         ]);
+    }
+    // agree term and condition
+    public function agreeTerm(Request $request)
+    {
+        $agree = $request->agree;
+        if ($agree) {
+            return response()->json([
+                'success' => "Agreed!"
+            ]);
+        } else {
+            return response()->json([
+                'error' => 'Agree to the Terms and Conditions to proceed to rental!'
+            ]);
+        }
     }
 }

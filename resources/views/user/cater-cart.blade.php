@@ -26,9 +26,14 @@
                                         <button class="btn btn-sm cater-info-btn" value="{{ $cater->id }}"><i
                                                 class="fa fa-info-circle text-primary fs-4"></i></button>
                                     </div>
-                                    <button value="{{ $cater->id }}" class="btn btn-primary remove-cater-cart">
-                                        Remove Package
-                                    </button>
+                                    <div class="d-flex gap-1">
+                                        <button value="{{ $cart->id }}" class="btn btn-primary rent-cater-cart">
+                                            Rent
+                                        </button>
+                                        <button value="{{ $cart->id }}" class="btn btn-primary remove-cater-cart">
+                                            Remove
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -36,21 +41,12 @@
                 @endforeach
                 @if ($carts->isEmpty())
                     No items in rental.
-                @else
-                    <div class="mt-5">
-                        <div class="d-flex justify-content-end">
-                            <div>
-
-                                <p>Total Price: <span class="fw-bold" id="total-price">P60000</span></p>
-                                <button class="btn btn-primary">Place Order <i class="fa fa-shopping-cart"></i></button>
-                            </div>
-                        </div>
-                    </div>
                 @endif
             </div>
         </div>
     </div>
 
     <x-cater-info />
+    <x-rent-cater />
     <!-- Service End -->
 @endsection

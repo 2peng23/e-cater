@@ -55,6 +55,7 @@ Route::middleware('auth')->group(function () {
     });
     // user
     Route::middleware('auth')->group(function () {
+        // cake
         Route::post('add-cart', [UserController::class, 'addCart'])->name('add-cart');
         Route::get('my-cake-orders', [UserController::class, 'cartItems'])->name('my-cake-orders');
         Route::get('add-quantity', [UserController::class, 'addQuantity'])->name('add-quantity');
@@ -65,6 +66,9 @@ Route::middleware('auth')->group(function () {
         Route::post('add-cater-cart', [UserController::class, 'addCaterCart'])->name('add-cater-cart');
         Route::get('my-rentals', [UserController::class, 'myRentals'])->name('my-rentals');
         Route::get('remove-cater-cart', [UserController::class, 'removeCaterCart'])->name('remove-cater-cart');
+
+        // rent and order
+        Route::post('agree-term', [UserController::class, 'agreeTerm'])->name('agree-term');
     });
 });
 

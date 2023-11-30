@@ -845,6 +845,7 @@ $(document).on("submit", "#add-cater-cart-form", function (e) {
 // delete from cater cart
 $(document).on("click", ".remove-cater-cart", function () {
     var id = $(this).val();
+    console.log(id);
     if (confirm("Remove item from rental?")) {
         $.ajax({
             url: "/remove-cater-cart",
@@ -870,4 +871,39 @@ $(document).on("click", ".remove-cater-cart", function () {
             },
         });
     }
+});
+// rent cater cart
+$(document).on("click", ".rent-cater-cart", function () {
+    var id = $(this).val();
+    $("#rent-cater-modal").modal("show");
+});
+// agree term and condition
+$(document).on("submit", "#agree-term-form", function (e) {
+    e.preventDefault();
+    var formData = $(this).serialize();
+    $.ajax({
+        url: "/agree-term",
+        data: formData,
+        type: "POST",
+        success: function (res) {
+            // Reset the form
+            $("#agree-term-form")[0].reset();
+            if (res.success) {
+                $("#success-modal").modal("show");
+                $("#success-message").html(res.success);
+                $("#rent-cater-modal").modal("hide");
+            } else {
+                // $("#error-modal").modal("show");
+                // $("#error-message").html(res.error);
+                $("#disagree").show();
+                $("#disagree").html(res.error);
+            }
+            // If you want to hide a success message after 1.5 seconds, uncomment the following lines
+            setTimeout(function () {
+                $("#disagree").hide();
+                $("#success-modal").modal("hide");
+                $("#error-modal").modal("hide");
+            }, 2000);
+        },
+    });
 });
