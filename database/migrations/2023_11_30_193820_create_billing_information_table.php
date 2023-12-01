@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cater_carts', function (Blueprint $table) {
+        Schema::create('billing_information', function (Blueprint $table) {
             $table->id();
-            $table->string('cart_id'); //user_id
-            $table->string('item_id'); //cake_id
-            $table->string('status')->default('unordered');
+            $table->string('name');
+            $table->string('image');
+            $table->string('number');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cater_carts');
+        Schema::dropIfExists('billing_information');
     }
 };

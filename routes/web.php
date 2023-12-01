@@ -34,6 +34,11 @@ Route::get('/dashboard', [HomeController::class, 'dashboard'])->middleware('auth
 Route::middleware('auth')->group(function () {
     // admin
     Route::middleware('auth')->group(function () {
+        // Billing
+        Route::get('billing-information', [AdminController::class, 'billingInfo'])->name('billing-information');
+        Route::post('add-billing', [AdminController::class, 'addBilling'])->name('add-billing');
+        Route::get('client-rentals', [AdminController::class, 'clientRental'])->name('client-rentals');
+        Route::get('approve-rent/{id}', [AdminController::class, 'approveRent'])->name('approve-rent');
         // cake
         Route::get('cake', [AdminController::class, 'cake'])->name('cake');
         Route::post('create-category', [AdminController::class, 'createCategory'])->name('create-category');
@@ -69,6 +74,9 @@ Route::middleware('auth')->group(function () {
 
         // rent and order
         Route::post('agree-term', [UserController::class, 'agreeTerm'])->name('agree-term');
+        Route::get('rent-package/{id}', [UserController::class, 'rentPackage'])->name('rent-package');
+        Route::get('get-image', [UserController::class, 'getImage'])->name('get-image');
+        Route::post('rental-order', [UserController::class, 'rentOrder'])->name('rental-order');
     });
 });
 

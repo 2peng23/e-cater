@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BillingInformation;
 use App\Models\Cake;
 use App\Models\Cart;
 use App\Models\CaterCart;
 use App\Models\Package;
+use App\Models\Rental;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,7 +35,7 @@ class UserController extends Controller
     }
     public function cartItems()
     {
-        $carts = Cart::where('cart_id', Auth::user()->id)->get();
+        $carts = Cart::where('cart_id', Auth::user()->id)->where('status', 'unordered')->get();
         $totalPrice = $this->calculateTotalPrice($carts);
 
         return view('user.cart', compact('carts', 'totalPrice'));
@@ -52,7 +54,7 @@ class UserController extends Controller
         $cake = Cake::find($cart_item);
 
         // total price
-        $carts = Cart::where('cart_id', Auth::user()->id)->get();
+        $carts = Cart::where('cart_id', Auth::user()->id)->where('status', 'unordered')->get();
         $totalPrice = $this->calculateTotalPrice($carts);
 
         return response()->json([
@@ -143,5 +145,48 @@ class UserController extends Controller
                 'error' => 'Agree to the Terms and Conditions to proceed to rental!'
             ]);
         }
+    }
+    public function rentPackage($id)
+    {
+        $package = CaterCart::find($id);
+        return view('user.rental', compact('package'));
+    }
+    public function getImage(Request $request)
+    {
+        $id = $request->id;
+        $info  = BillingInformation::find($id);
+        return response()->json([
+            'image' => $info->image
+        ]);
+    }
+    public function rentOrder(Request $request)
+    {
+        $existing = Rental::where('rental_id', Auth::user()->id)->where('status', 'pending')->first();
+        if ($existing) {
+            return response()->json([
+                'error' => "You still have pending rental! Please wait for confirmation."
+            ]);
+        }
+        $data = new Rental();
+        $data->item_id = $request->item_id;
+        $data->rental_id = Auth::user()->id;
+        $data->name = $request->name;
+        $data->address = $request->address;
+        $data->date = $request->date;
+        $data->downpayment = $request->downpayment;
+        $photo = $request->image;
+        if ($photo) {
+            $photoname = $photo->getClientOriginalName();
+
+            // Move the uploaded image to the specified directory
+            $photo->move(public_path('images/rental'), $photoname);
+
+            // Save the image path to the database
+            $data->image = 'images/rental/' . $photoname;
+        }
+        $data->save();
+        return response()->json([
+            'success' => "You have successfully rent this package!"
+        ]);
     }
 }

@@ -26,6 +26,12 @@
                 </ul>
             </div>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('billing-information') }}">
+                <i class="fa fa-coins menu-icon"></i>
+                <span class="menu-title">Billing Information</span>
+            </a>
+        </li>
         <li class="nav-item nav-category">Order & Rentals</li>
         <li class="nav-item">
             <a class="nav-link" href="/">
@@ -34,7 +40,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/">
+            <a class="nav-link" href="{{ route('client-rentals') }}">
                 <i class="mdi mdi-tent menu-icon"></i>
                 <span class="menu-title">Rentals</span>
             </a>

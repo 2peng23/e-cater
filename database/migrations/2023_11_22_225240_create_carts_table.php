@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('cart_id'); //user_id
             $table->string('item_id'); //cake_id
             $table->string('quantity');
+            $table->string('status')->default('unordered');
             $table->timestamps();
         });
     }

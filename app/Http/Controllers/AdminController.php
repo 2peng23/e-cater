@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BillingInformation;
 use App\Models\Cake;
 use App\Models\Category;
 use App\Models\CaterStock;
 use App\Models\Package;
+use App\Models\Rental;
 use App\Models\Stock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -268,6 +270,69 @@ class AdminController extends Controller
         $stock->save();
         return response()->json([
             'success' => "Stock updated!"
+        ]);
+    }
+
+    // biling info
+    public function billingInfo()
+    {
+        $billing = BillingInformation::all();
+        return view('admin.billing', compact('billing'));
+    }
+    public function addBilling(Request $request)
+    {
+        $billing = new BillingInformation();
+        $billing->name = $request->name;
+        $billing->number = $request->number;
+        $photo = $request->image;
+        if ($photo) {
+            $photoname = $photo->getClientOriginalName();
+
+            // Move the uploaded image to the specified directory
+            $photo->move(public_path('images/billing'), $photoname);
+
+            // Save the image path to the database
+            $billing->image = 'images/billing/' . $photoname;
+        }
+        $billing->save();
+
+        return response()->json([
+            'success' => "Account information added!"
+        ]);
+    }
+    public function clientRental(Request $request)
+    {
+        $rentals = DB::table('rentals')->orderBy('updated_at', 'desc');
+        // Retrieve input parameters
+        $name = $request->input('rental_name');
+        $date = $request->input('rental_date');
+        // $page = $request->input('page_select', 5); // Set a default value for page if not provided
+        // Apply filters
+        if ($name) {
+            $rentals->where('name', 'like', "%{$name}%");
+        }
+
+        // Search by Date Range
+        if ($date) {
+            $dateArray = explode(' - ', $date);
+            $start_date = \Carbon\Carbon::createFromFormat('m/d/Y', $dateArray[0])->startOfDay();
+            $end_date = \Carbon\Carbon::createFromFormat('m/d/Y', $dateArray[1])->endOfDay();
+            $rentals = $rentals->whereBetween('created_at', [$start_date, $end_date]);
+        }
+        // Paginate the results
+        $rentals = $rentals->paginate(10);
+
+        // Append parameters to pagination links
+        $rentals->appends(['appointment_name' => $name, 'appointment_date' => $date]);
+        return view('admin.rentals', compact('rentals', 'name', 'date'));
+    }
+    public function approveRent($id)
+    {
+        $rental = Rental::find($id);
+        $rental->status = 'approved';
+        $rental->save();
+        return response()->json([
+            'success' => "Rental has been approved!"
         ]);
     }
 }
