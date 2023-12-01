@@ -32,7 +32,7 @@
                             <div class="d-flex justify-content-start p-2 ">
                                 <div class="rounded-circle border align-items-center ">
                                     <p style="" class="mb-3 fw-bold px-3 pt-3">P<span
-                                            class="text-warning">{{ $cake->price }}</span>
+                                            class="text-warning">{{ number_format($cake->price, 2) }}</span>
                                     </p>
                                 </div>
                             </div>

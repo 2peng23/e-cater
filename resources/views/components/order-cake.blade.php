@@ -22,7 +22,7 @@
 
                 <form action="{{ route('agree-term') }}" method="POST" id="agree-term-form">
                     @csrf
-                    <input type="text" name="item_id" id="item_id">
+                    <input type="hidden" name="item_id" id="item_id">
                     <div class="mb-2">
                         <p class="text-danger" id='disagree'></p>
                     </div>
@@ -30,7 +30,7 @@
                         <label for="agree" class="form-label fw-bold">Accept Terms and Conditions</label>
                         <input type="checkbox" class="form-check p-2" name="agree" id="agree" value=1>
                     </div>
-                    <button type="submit" class="btn btn-primary">Rent Package</button>
+                    <button type="submit" class="btn btn-primary">Order Cake</button>
                 </form>
             </div>
             <div class="modal-footer">

@@ -11,7 +11,7 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0" id="navBar">
             <a href="/"
-                class="nav-item nav-link  {{ request()->routeIs('my-cake-orders', 'my-rentals') ? '' : 'active' }}">Home</a>
+                class="nav-item nav-link  {{ request()->routeIs('my-cake-orders', 'my-rentals', 'my-orders&rentals') ? '' : 'active' }}">Home</a>
             <a href="#about-section" class="nav-item nav-link">About</a>
             <a @if (request()->routeIs('cart-items')) href="dashboard/#cake-section"
             @else
@@ -31,7 +31,7 @@
             @if (Auth::check())
                 <div class="nav-item dropdown">
                     <a href="#"
-                        class="nav-link dropdown-toggle {{ request()->routeIs('my-cake-orders', 'my-rentals') ? 'active' : '' }}"
+                        class="nav-link dropdown-toggle {{ request()->routeIs('my-cake-orders', 'my-rentals', 'my-orders&rentals') ? 'active' : '' }}"
                         data-bs-toggle="dropdown">Order &
                         Rental</a>
                     <div class="dropdown-menu fade-up m-0">
@@ -39,7 +39,9 @@
                             class="dropdown-item position-relative {{ request()->routeIs('my-cake-orders') ? 'active' : '' }}">
                             <p class="position-absolute fw-bolder" style="top: 5px; right:0">
                                 @php
-                                    $cart_count = App\Models\Cart::where('cart_id', Auth::user()->id)->count();
+                                    $cart_count = App\Models\Cart::where('cart_id', Auth::user()->id)
+                                        ->where('status', 'unordered')
+                                        ->count();
                                 @endphp
                                 {{ $cart_count }}
                             </p>
@@ -49,11 +51,17 @@
                             class="dropdown-item position-relative {{ request()->routeIs('my-rentals') ? 'active' : '' }}">
                             <p class="position-absolute fw-bolder" style="top: 5px; right:0">
                                 @php
-                                    $rents = App\Models\CaterCart::where('cart_id', Auth::user()->id)->count();
+                                    $rents = App\Models\CaterCart::where('cart_id', Auth::user()->id)
+                                        ->where('status', 'unordered')
+                                        ->count();
                                 @endphp
                                 {{ $rents }}
                             </p>
                             Rental
+                        </a>
+                        <a href="{{ route('my-orders&rentals') }}"
+                            class="dropdown-item position-relative {{ request()->routeIs('my-orders&rentals') ? 'active' : '' }}">
+                            My Orders and Rentals
                         </a>
                     </div>
                 </div>

@@ -52,28 +52,29 @@
                 <input type="hidden" name="item_id" value="{{ $cater_package->id }}">
                 <div class="mb-2">
                     <label class="form-label fw-bold" for="name">Full Name <span class="text-danger">*</span></label>
-                    <input class="form-control" placeholder="Customer's Full Name" type="text" name="name"
+                    <input class="form-control" placeholder="Customer's Full Name" type="text" name="name" required
                         id="name">
                 </div>
                 <div class="mb-2">
                     <label class="form-label fw-bold" for="address">Address <span class="text-danger">*</span></label>
-                    <input class="form-control" placeholder="Event Address" type="text" name="address" id="address">
+                    <input class="form-control" placeholder="Event Address" type="text" name="address" id="address"
+                        required>
                 </div>
                 <div class="mb-2">
                     <label class="form-label fw-bold" for="date">Event Date <span class="text-danger">*</span></label>
                     <input class="form-control" placeholder="Event Date" type="date" name="date" id="date"
-                        min="{{ now() }}">
+                        required min="{{ now()->format('Y-m-d') }}">
                 </div>
                 <div class="mb-2">
                     <label class="form-label fw-bold" for="downpayment">Downpayment <span
                             class="text-danger">*</span></label>
-                    <input class="form-control" placeholder="Downpayment Amount" type="number" name="downpayment"
-                        id="downpayment" min="{{ now() }}">
+                    <input class="form-control" placeholder="Downpayment Amount" required type="number" name="downpayment"
+                        id="downpayment">
                 </div>
                 <div class="mb-2">
                     <label class="form-label fw-bold" for="image">Proof of Payment <span
                             class="text-danger">*</span></label>
-                    <input class="form-control" type="file" name="image" id="image" accept="image/*">
+                    <input class="form-control" type="file" name="image" required id="image" accept="image/*">
                 </div>
                 <div class="d-flex justify-content-end mt-3">
                     <button class="btn btn-primary">Rent Package</button>

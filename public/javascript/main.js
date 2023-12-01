@@ -879,7 +879,7 @@ $(document).on("click", ".rent-cater-cart", function () {
     $("#item_id").val(id);
 });
 // agree term and condition
-$(document).on("submit", "#agree-term-form", function (e) {
+$(document).on("submit", "#agree-cater-form", function (e) {
     e.preventDefault();
     var id = $("#item_id").val();
     console.log(id);
@@ -890,7 +890,7 @@ $(document).on("submit", "#agree-term-form", function (e) {
         type: "POST",
         success: function (res) {
             // Reset the form
-            $("#agree-term-form")[0].reset();
+            $("#agree-cater-form")[0].reset();
             if (res.success) {
                 $("#rent-cater-modal").modal("hide");
                 window.location.href = "/rent-package/" + id;
@@ -972,47 +972,47 @@ $(document).on("click", ".billing-info-btn", function () {
     });
 });
 // submit rent order
-$(document).on("submit", "#rental-order-form", function (e) {
-    e.preventDefault();
-    // Get the form data
-    var formData = new FormData(this);
-    $.ajax({
-        url: "/rental-order",
-        type: "post",
-        data: formData,
-        contentType: false,
-        processData: false,
-        success: function (res) {
-            // Reset the form
-            $("#rental-order-form")[0].reset();
-            if (res.success) {
-                $("#success-modal").modal("show");
-                $("#success-message").html(res.success);
-            } else {
-                $("#error-modal").modal("show");
-                $("#error-message").html(res.error);
-            }
-            // If you want to hide a success message after 1.5 seconds, uncomment the following lines
-            setTimeout(function () {
-                $("#success-modal").modal("hide");
-                $("#error-modal").modal("hide");
-            }, 2000);
-        },
-        error: function (xhr, status, error) {
-            // If you want to handle errors and display error messages, uncomment the following lines
-            var errors = xhr.responseJSON.errors;
-            var errorString = "";
-            $.each(errors, function (key, value) {
-                errorString += value + "<br>";
-            });
-            $("#error-modal").modal("show");
-            $("#error-message").html(errorString);
-            setTimeout(function () {
-                $("#error-modal").modal("hide");
-            }, 2000);
-        },
-    });
-});
+// $(document).on("submit", "#rental-order-form", function (e) {
+//     e.preventDefault();
+//     // Get the form data
+//     var formData = new FormData(this);
+//     $.ajax({
+//         url: "/rental-order",
+//         type: "post",
+//         data: formData,
+//         contentType: false,
+//         processData: false,
+//         success: function (res) {
+//             // Reset the form
+//             $("#rental-order-form")[0].reset();
+//             if (res.success) {
+//                 $("#success-modal").modal("show");
+//                 $("#success-message").html(res.success);
+//             } else {
+//                 $("#error-modal").modal("show");
+//                 $("#error-message").html(res.error);
+//             }
+//             // If you want to hide a success message after 1.5 seconds, uncomment the following lines
+//             setTimeout(function () {
+//                 $("#success-modal").modal("hide");
+//                 $("#error-modal").modal("hide");
+//             }, 2000);
+//         },
+//         error: function (xhr, status, error) {
+//             // If you want to handle errors and display error messages, uncomment the following lines
+//             var errors = xhr.responseJSON.errors;
+//             var errorString = "";
+//             $.each(errors, function (key, value) {
+//                 errorString += value + "<br>";
+//             });
+//             $("#error-modal").modal("show");
+//             $("#error-message").html(errorString);
+//             setTimeout(function () {
+//                 $("#error-modal").modal("hide");
+//             }, 2000);
+//         },
+//     });
+// });
 // view down info
 $(document).on("click", ".view-down-btn", function () {
     var id = $(this).val();
@@ -1099,6 +1099,49 @@ $(document).on("submit", "#agree-term-form", function (e) {
             setTimeout(function () {
                 $("#disagree").hide();
                 $("#success-modal").modal("hide");
+                $("#error-modal").modal("hide");
+            }, 2000);
+        },
+    });
+});
+
+// submit cake order
+$(document).on("submit", "#avail-cake-form", function (e) {
+    e.preventDefault();
+    // Get the form data
+    var formData = new FormData(this);
+    $.ajax({
+        url: "/avail-cake",
+        type: "post",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (res) {
+            // Reset the form
+            $("#avail-cake-form")[0].reset();
+            if (res.success) {
+                $("#success-modal").modal("show");
+                $("#success-message").html(res.success);
+            } else {
+                $("#error-modal").modal("show");
+                $("#error-message").html(res.error);
+            }
+            // If you want to hide a success message after 1.5 seconds, uncomment the following lines
+            setTimeout(function () {
+                $("#success-modal").modal("hide");
+                $("#error-modal").modal("hide");
+            }, 2000);
+        },
+        error: function (xhr, status, error) {
+            // If you want to handle errors and display error messages, uncomment the following lines
+            var errors = xhr.responseJSON.errors;
+            var errorString = "";
+            $.each(errors, function (key, value) {
+                errorString += value + "<br>";
+            });
+            $("#error-modal").modal("show");
+            $("#error-message").html(errorString);
+            setTimeout(function () {
                 $("#error-modal").modal("hide");
             }, 2000);
         },

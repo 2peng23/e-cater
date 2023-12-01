@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BillingInformation;
 use App\Models\Cake;
+use App\Models\CakeOrder;
 use App\Models\Cart;
 use App\Models\CaterCart;
 use App\Models\Package;
@@ -16,12 +17,12 @@ class UserController extends Controller
     public function addCart(Request $request)
     {
         $existing = Cart::where('item_id', $request->item_id)
-            ->where('cart_id', $request->cart_id)->first();
+            ->where('cart_id', $request->cart_id)->where('status', 'unordered')->first();
         if ($existing) {
             $existing->quantity = $existing->quantity + $request->quantity;
             $existing->save();
             return response()->json([
-                'success' => "Added to Cart!"
+                'success' => "Added to Orders!"
             ]);
         }
         $cart = new Cart();
@@ -30,7 +31,7 @@ class UserController extends Controller
         $cart->quantity = $request->quantity;
         $cart->save();
         return response()->json([
-            'success' => "Added to Cart!"
+            'success' => "Added to Orders!"
         ]);
     }
     public function cartItems()
@@ -117,7 +118,7 @@ class UserController extends Controller
     }
     public function myRentals()
     {
-        $carts = CaterCart::where('cart_id', Auth::user()->id)->get();
+        $carts = CaterCart::where('cart_id', Auth::user()->id)->where('status', 'unordered')->get();
         // $totalPrice = $this->calculateTotalPrice($carts);
 
         return view('user.cater-cart', compact('carts'));
@@ -161,6 +162,12 @@ class UserController extends Controller
     }
     public function rentOrder(Request $request)
     {
+        // remove cake from cart
+        $rental_cart = CaterCart::where('item_id', $request->item_id)->where('cart_id', Auth::user()->id)->first();
+        $rental_cart->status = 'ordered';
+        $rental_cart->save();
+
+        //exsting
         $existing = Rental::where('rental_id', Auth::user()->id)->where('status', 'pending')->first();
         if ($existing) {
             return response()->json([
@@ -191,7 +198,46 @@ class UserController extends Controller
     }
     public function orderCake($id)
     {
+        $cake_order = Cart::where('item_id', $id)->where('cart_id', Auth::user()->id)->first();
         $cake = Cart::find($id);
-        return view('user.order-cake', compact('cake'));
+        return view('user.order-cake', compact('cake', 'cake_order'));
+    }
+    public function availCake(Request $request)
+    {
+        // remove cake from cart
+        $cake_cart = Cart::where('item_id', $request->item_id)->where('cart_id', Auth::user()->id)->where('status', 'unordered')->first();
+        $cake_cart->status = 'ordered';
+        $cake_cart->save();
+
+        // save order cake
+        $data = new CakeOrder();
+        $data->item_id = $request->item_id;
+        $data->order_id = Auth::user()->id;
+        $data->name = $request->name;
+        $data->quantity = $request->quantity;
+        $data->address = $request->address;
+        $data->date = $request->date;
+        $data->downpayment = $request->downpayment;
+        $data->customize = $request->customize;
+        $photo = $request->image;
+        if ($photo) {
+            $photoname = $photo->getClientOriginalName();
+
+            // Move the uploaded image to the specified directory
+            $photo->move(public_path('images/cakeOrder'), $photoname);
+
+            // Save the image path to the database
+            $data->image = 'images/cakeOrder/' . $photoname;
+        }
+        $data->save();
+        return response()->json([
+            'success' => "You have successfully ordered this cake!"
+        ]);
+    }
+    public function myOrdersRentals()
+    {
+        $cake_orders = CakeOrder::where('order_id', Auth::user()->id)->get();
+        $rentals = Rental::where('rental_id', Auth::user()->id)->get();
+        return view('user.my-orders&rentals', compact('cake_orders', 'rentals'));
     }
 }

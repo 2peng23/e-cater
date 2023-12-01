@@ -40,7 +40,7 @@
                     <li class="mb-2"> This Contract shall take effect only upon payment of the price agreed upon.</li>
                 </ul>
 
-                <form action="{{ route('agree-term') }}" method="POST" id="agree-term-form">
+                <form action="{{ route('agree-term') }}" method="POST" id="agree-cater-form">
                     @csrf
                     <input type="hidden" name="item_id" id="item_id">
                     <div class="mb-2">
