@@ -23,9 +23,14 @@
                                             data-id="{{ $cart->id }}">
                                     </div>
                                     <p class="card-text" id="cart-price">P{{ $cart->quantity * $cake->price }}</p>
-                                    <button value="{{ $cart->id }}" class="btn btn-primary remove-cart">
-                                        Remove from Cart
-                                    </button>
+                                    <div class="d-flex gap-2">
+                                        <button value="{{ $cart->id }}" class="btn btn-primary order-cake">
+                                            Order
+                                        </button>
+                                        <button value="{{ $cart->id }}" class="btn btn-primary remove-cart">
+                                            Remove
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -33,7 +38,7 @@
                 @endforeach
                 @if ($carts->isEmpty())
                     No items in your cart.
-                @else
+                    {{-- @else
                     <div class="mt-5">
                         <div class="d-flex justify-content-end">
                             <div>
@@ -42,10 +47,11 @@
                                 <button class="btn btn-primary">Place Order <i class="fa fa-shopping-cart"></i></button>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 @endif
             </div>
         </div>
     </div>
     <!-- Service End -->
+    <x-order-cake />
 @endsection

@@ -335,4 +335,13 @@ class AdminController extends Controller
             'success' => "Rental has been approved!"
         ]);
     }
+    public function declineRent($id)
+    {
+        $rental = Rental::find($id);
+        $rental->status = 'declined';
+        $rental->save();
+        return response()->json([
+            'error' => "Rental has been declined!"
+        ]);
+    }
 }

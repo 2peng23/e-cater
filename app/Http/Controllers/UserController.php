@@ -189,4 +189,9 @@ class UserController extends Controller
             'success' => "You have successfully rent this package!"
         ]);
     }
+    public function orderCake($id)
+    {
+        $cake = Cart::find($id);
+        return view('user.order-cake', compact('cake'));
+    }
 }

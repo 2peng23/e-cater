@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function () {
         Route::post('add-billing', [AdminController::class, 'addBilling'])->name('add-billing');
         Route::get('client-rentals', [AdminController::class, 'clientRental'])->name('client-rentals');
         Route::get('approve-rent/{id}', [AdminController::class, 'approveRent'])->name('approve-rent');
+        Route::get('decline-rent/{id}', [AdminController::class, 'declineRent'])->name('decline-rent');
         // cake
         Route::get('cake', [AdminController::class, 'cake'])->name('cake');
         Route::post('create-category', [AdminController::class, 'createCategory'])->name('create-category');
@@ -77,6 +78,7 @@ Route::middleware('auth')->group(function () {
         Route::get('rent-package/{id}', [UserController::class, 'rentPackage'])->name('rent-package');
         Route::get('get-image', [UserController::class, 'getImage'])->name('get-image');
         Route::post('rental-order', [UserController::class, 'rentOrder'])->name('rental-order');
+        Route::get('order-cake/{id}', [UserController::class, 'orderCake'])->name('order-cake');
     });
 });
 

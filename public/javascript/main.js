@@ -1018,6 +1018,7 @@ $(document).on("click", ".view-down-btn", function () {
     var id = $(this).val();
     $("#view-down-modal").modal("show");
 });
+// approve
 $(document).on("click", ".approve-rent-btn", function () {
     var id = $(this).val();
     console.log(id);
@@ -1025,8 +1026,81 @@ $(document).on("click", ".approve-rent-btn", function () {
         url: "/approve-rent/" + id,
         type: "get",
         success: function (res) {
-            console.log(res);
-            $("#all-data").load(window.location.href + " #all-data");
+            if (res.success) {
+                $("#success-modal").modal("show");
+                $("#success-message").html(res.success);
+                $("#all-data").load(window.location.href + " #all-data");
+            } else {
+                $("#error-modal").modal("show");
+                $("#error-message").html(res.error);
+            }
+            // If you want to hide a success message after 1.5 seconds, uncomment the following lines
+            setTimeout(function () {
+                $("#success-modal").modal("hide");
+                $("#error-modal").modal("hide");
+            }, 2000);
+        },
+    });
+});
+// decline
+$(document).on("click", ".decline-rent-btn", function () {
+    var id = $(this).val();
+    console.log(id);
+    $.ajax({
+        url: "/decline-rent/" + id,
+        type: "get",
+        success: function (res) {
+            if (res.success) {
+                $("#success-modal").modal("show");
+                $("#success-message").html(res.success);
+            } else {
+                $("#error-modal").modal("show");
+                $("#error-message").html(res.error);
+                $("#all-data").load(window.location.href + " #all-data");
+            }
+            // If you want to hide a success message after 1.5 seconds, uncomment the following lines
+            setTimeout(function () {
+                $("#success-modal").modal("hide");
+                $("#error-modal").modal("hide");
+            }, 2000);
+        },
+    });
+});
+
+// order cake
+$(document).on("click", ".order-cake", function () {
+    var id = $(this).val();
+    $("#order-cake-modal").modal("show");
+    $("#item_id").val(id);
+});
+// agree term and condition
+$(document).on("submit", "#agree-term-form", function (e) {
+    e.preventDefault();
+    var id = $("#item_id").val();
+    console.log(id);
+    var formData = $(this).serialize();
+    $.ajax({
+        url: "/agree-term",
+        data: formData,
+        type: "POST",
+        success: function (res) {
+            // Reset the form
+            $("#agree-term-form")[0].reset();
+            if (res.success) {
+                $("#order-cake-modal").modal("hide");
+                window.location.href = "/order-cake/" + id;
+            } else {
+                // $("#error-modal").modal("show");
+                // $("#error-message").html(res.error);
+                $("#disagree").show();
+                $("#disagree").html(res.error);
+            }
+            // If you want to hide a success message after 1.5 seconds, uncomment the following lines
+            setTimeout(function () {
+                $("#disagree").hide();
+                $("#success-modal").modal("hide");
+                $("#error-modal").modal("hide");
+            }, 2000);
         },
     });
 });
