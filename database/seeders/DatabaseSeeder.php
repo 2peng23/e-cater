@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
             Cake::create([
                 'category' => $cake['category'],
                 'image' => $cake['image'],
+                'price' => $cake['price'],
             ]);
         }
 

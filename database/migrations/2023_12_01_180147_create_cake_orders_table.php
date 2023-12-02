@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('item_id'); //package id
             $table->string('order_id'); //auth user id
             $table->string('name');
+            $table->string('phone');
             $table->string('address');
             $table->string('date');
             $table->string('quantity');

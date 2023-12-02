@@ -49,7 +49,8 @@
                                                 style="max-width: 95px">Add
                                                 order</button>
                                         @else
-                                            <button class="btn btn-sm btn-danger " style="max-width: 95px">Out of
+                                            <button disabled class="btn btn-sm btn-danger " style="max-width: 95px">Out
+                                                of
                                                 stock</button>
                                         @endif
                                     </div>

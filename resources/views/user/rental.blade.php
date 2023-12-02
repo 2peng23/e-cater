@@ -56,6 +56,11 @@
                         id="name">
                 </div>
                 <div class="mb-2">
+                    <label class="form-label fw-bold" for="phone">Phone <span class="text-danger">*</span></label>
+                    <input class="form-control" placeholder="Contact Number" type="text" name="phone" id="phone"
+                        required>
+                </div>
+                <div class="mb-2">
                     <label class="form-label fw-bold" for="address">Address <span class="text-danger">*</span></label>
                     <input class="form-control" placeholder="Event Address" type="text" name="address" id="address"
                         required>

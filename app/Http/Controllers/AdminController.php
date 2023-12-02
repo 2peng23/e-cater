@@ -332,18 +332,74 @@ class AdminController extends Controller
         $rental = Rental::find($id);
         $rental->status = 'approved';
         $rental->save();
-        return response()->json([
-            'success' => "Rental has been approved!"
+        $details = [
+            'greetings' => 'Dear Mr/Mrs ' . $rental->name . ',',
+            'body' => " Your Package Rental Successfully Confirmed!. We're thrilled to share the fantastic news that your package rental request has been successfully processed! Your chosen package is now reserved and ready to enhance your experience.",
+            'actiontext' => 'View rental details ',
+            'actionurl' => url('my-orders&rentals'),
+            'endpart' => ' Thank You!'
+        ];
+        // Construct the request body
+        $body = [
+            'number' => $rental->phone,
+            'message' => $details['greetings'] . $details['body'] . $details['actiontext'] . $details['actionurl'] . $details['endpart'],
+            'sendername' => 'SEMAPHORE',
+            'apikey' => 'bf09f02bd326ac4b087d104786368fdf' // Replace with your Semaphore API key
+        ];
+
+        // Send the request using Guzzle HTTP client
+        $client = new \GuzzleHttp\Client();
+        $response = $client->post('https://api.semaphore.co/api/v4/messages', [
+            'form_params' => $body
         ]);
+        // Check the response status code
+        $statusCode = $response->getStatusCode();
+        if ($statusCode === 200) {
+            // SMS sent successfully
+            return response()->json([
+                'success' => 'Cake Order has been declined. Client successfully notified!'
+            ]);
+        } else {
+            // SMS sending failed
+            return response()->json(['error' => 'SMS sending failed']);
+        }
     }
     public function declineRent($id)
     {
         $rental = Rental::find($id);
         $rental->status = 'declined';
         $rental->save();
-        return response()->json([
-            'error' => "Rental has been declined!"
+        $details = [
+            'greetings' => 'Dear Mr/Mrs ' . $rental->name . ',',
+            'body' => " Your Package Rental has been declined!.  Please make new rental request.",
+            'actiontext' => 'View rental details ',
+            'actionurl' => url('my-orders&rentals'),
+            'endpart' => ' Thank You!'
+        ];
+        // Construct the request body
+        $body = [
+            'number' => $rental->phone,
+            'message' => $details['greetings'] . $details['body'] . $details['actiontext'] . $details['actionurl'] . $details['endpart'],
+            'sendername' => 'SEMAPHORE',
+            'apikey' => 'bf09f02bd326ac4b087d104786368fdf' // Replace with your Semaphore API key
+        ];
+
+        // Send the request using Guzzle HTTP client
+        $client = new \GuzzleHttp\Client();
+        $response = $client->post('https://api.semaphore.co/api/v4/messages', [
+            'form_params' => $body
         ]);
+        // Check the response status code
+        $statusCode = $response->getStatusCode();
+        if ($statusCode === 200) {
+            // SMS sent successfully
+            return response()->json([
+                'error' => 'Cake Order has been declined. Client successfully notified!'
+            ]);
+        } else {
+            // SMS sending failed
+            return response()->json(['error' => 'SMS sending failed']);
+        }
     }
     public function allCakeOrder(Request $request)
     {
@@ -376,7 +432,7 @@ class AdminController extends Controller
         $cake_order = $request->cake_id;
         if ($cake_order) {
             $data = CakeOrder::find($cake_order);
-            $cake = Cake::where('id', $data->id)->first();
+            $cake = Cake::where('id', $data->item_id)->first();
             return response()->json([
                 'image' => $data->image,
                 'quantity' => $data->quantity,
@@ -388,12 +444,93 @@ class AdminController extends Controller
         $rental = $request->rental_id;
         if ($rental) {
             $data = Rental::find($rental);
-            $rental = Package::where('id', $data->id)->first();
+            $rental = Package::where('id', $data->item_id)->first();
             return response()->json([
                 'price' => $rental->price,
                 'downpayment' => $data->downpayment,
                 'image' => $data->image
             ]);
+        }
+    }
+    public function getMessage($id)
+    {
+        $data = CakeOrder::find($id);
+        return response()->json([
+            'message' => $data->customize
+        ]);
+    }
+    public function approveCake($id)
+    {
+        $cakeOrder = CakeOrder::find($id);
+        $cakeOrder->status = 'approved';
+        $cakeOrder->save();
+        $details = [
+            'greetings' => 'Dear Mr/Mrs ' . $cakeOrder->name . ',',
+            'body' => 'Your cake order has been confirmed. Kindly go to Murillo Cake Haus and Catering Service.',
+            'actiontext' => 'View order details ',
+            'actionurl' => url('my-orders&rentals'),
+            'endpart' => ' Thank You!'
+        ];
+        // Construct the request body
+        $body = [
+            'number' => $cakeOrder->phone,
+            'message' => $details['greetings'] . $details['body'] . $details['actionurl'] . $details['endpart'],
+            'sendername' => 'SEMAPHORE',
+            'apikey' => 'bf09f02bd326ac4b087d104786368fdf' // Replace with your Semaphore API key
+        ];
+
+        // Send the request using Guzzle HTTP client
+        $client = new \GuzzleHttp\Client();
+        $response = $client->post('https://api.semaphore.co/api/v4/messages', [
+            'form_params' => $body
+        ]);
+        // Check the response status code
+        $statusCode = $response->getStatusCode();
+        if ($statusCode === 200) {
+            // SMS sent successfully
+            return response()->json([
+                'success' => 'Cake Order has been confirmed. Client successfully notified!'
+            ]);
+        } else {
+            // SMS sending failed
+            return response()->json(['error' => 'SMS sending failed']);
+        }
+    }
+    public function declineCake($id)
+    {
+        $cakeOrder = CakeOrder::find($id);
+        $cakeOrder->status = 'declined';
+        $cakeOrder->save();
+        $details = [
+            'greetings' => 'Dear Mr/Mrs ' . $cakeOrder->name . ',',
+            'body' => 'Your cake order has been declined. Please make another purchase.',
+            'actiontext' => 'View order details ',
+            'actionurl' => url('my-orders&rentals'),
+            'endpart' => ' Thank You!'
+        ];
+        // Construct the request body
+        $body = [
+            'number' => $cakeOrder->phone,
+            'message' => $details['greetings'] . $details['body'] . $details['actionurl'] . $details['endpart'],
+            'sendername' => 'SEMAPHORE',
+            'apikey' => 'bf09f02bd326ac4b087d104786368fdf' // Replace with your Semaphore API key
+        ];
+
+        // Send the request using Guzzle HTTP client
+        $client = new \GuzzleHttp\Client();
+        $response = $client->post('https://api.semaphore.co/api/v4/messages', [
+            'form_params' => $body
+        ]);
+        // Check the response status code
+        $statusCode = $response->getStatusCode();
+        if ($statusCode === 200) {
+            // SMS sent successfully
+            return response()->json([
+                'error' => 'Cake Order has been declined. Client successfully notified!'
+            ]);
+        } else {
+            // SMS sending failed
+            return response()->json(['error' => 'SMS sending failed']);
         }
     }
 }

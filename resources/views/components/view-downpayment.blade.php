@@ -5,8 +5,6 @@
                 <h5 class="modal-title">Proof of Payment</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            {{-- <form action="{{ route('add-cake') }}" id="add-cake-form" enctype="multipart/form-data" method="POST">
-                @csrf --}}
             <div class="modal-body">
                 <div>
                     <div id="cake-info" style="display: none">
@@ -28,7 +26,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     {{-- <button type="submit" class="btn btn-primary text-white">Save changes</button> --}}
                 </div>
-                {{-- </form> --}}
             </div>
         </div>
     </div>
+</div>

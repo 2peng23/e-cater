@@ -1,192 +1,230 @@
 [
     {
         "category" : "Wedding Cakes",
-        "image" : "images/cake/Wedding Cakes/1.png"
+        "image" : "images/cake/Wedding Cakes/1.png",
+        "price" : 500
         
     },
     {
         "category" : "Wedding Cakes",
-        "image" : "images/cake/Wedding Cakes/2.png"
+        "image" : "images/cake/Wedding Cakes/2.png",
+        "price" : 500
         
     },
     {
         "category" : "Wedding Cakes",
-        "image" : "images/cake/Wedding Cakes/3.png"
+        "image" : "images/cake/Wedding Cakes/3.png",
+        "price" : 500
         
     },
     {
         "category" : "Wedding Cakes",
-        "image" : "images/cake/Wedding Cakes/4.png"
+        "image" : "images/cake/Wedding Cakes/4.png",
+        "price" : 500
         
     },
     {
         "category" : "Wedding Cakes",
-        "image" : "images/cake/Wedding Cakes/5.png"
+        "image" : "images/cake/Wedding Cakes/5.png",
+        "price" : 500
         
     },
     {
         "category" : "Drip Cakes",
-        "image" : "images/cake/Drip Cakes/1.png"
+        "image" : "images/cake/Drip Cakes/1.png",
+        "price" : 600
         
     },
     {
         "category" : "Drip Cakes",
-        "image" : "images/cake/Drip Cakes/2.png"
+        "image" : "images/cake/Drip Cakes/2.png",
+        "price" : 600
         
     },
     {
         "category" : "Drip Cakes",
-        "image" : "images/cake/Drip Cakes/3.png"
+        "image" : "images/cake/Drip Cakes/3.png",
+        "price" : 600
         
     },
     {
         "category" : "Drip Cakes",
-        "image" : "images/cake/Drip Cakes/4.png"
+        "image" : "images/cake/Drip Cakes/4.png",
+        "price" : 600
         
     },
     {
         "category" : "Drip Cakes",
-        "image" : "images/cake/Drip Cakes/5.png"
+        "image" : "images/cake/Drip Cakes/5.png",
+        "price" : 600
         
     },
     {
         "category" : "Floral Cakes",
-        "image" : "images/cake/Floral Cakes/1.png"
+        "image" : "images/cake/Floral Cakes/1.png",
+        "price" : 700
         
     },
     {
         "category" : "Floral Cakes",
-        "image" : "images/cake/Floral Cakes/2.png"
+        "image" : "images/cake/Floral Cakes/2.png",
+        "price" : 700
         
     },
     {
         "category" : "Floral Cakes",
-        "image" : "images/cake/Floral Cakes/3.png"
+        "image" : "images/cake/Floral Cakes/3.png",
+        "price" : 700
         
     },
     {
         "category" : "Floral Cakes",
-        "image" : "images/cake/Floral Cakes/4.png"
+        "image" : "images/cake/Floral Cakes/4.png",
+        "price" : 700
         
     },
     {
         "category" : "Floral Cakes",
-        "image" : "images/cake/Floral Cakes/5.png"
+        "image" : "images/cake/Floral Cakes/5.png",
+        "price" : 700
         
     },
     {
         "category" : "Fondant Cakes",
-        "image" : "images/cake/Fondant Cakes/1.png"
+        "image" : "images/cake/Fondant Cakes/1.png",
+        "price" : 450
         
     },
     {
         "category" : "Fondant Cakes",
-        "image" : "images/cake/Fondant Cakes/2.png"
+        "image" : "images/cake/Fondant Cakes/2.png",
+        "price" : 450
         
     },
     {
         "category" : "Fondant Cakes",
-        "image" : "images/cake/Fondant Cakes/3.png"
+        "image" : "images/cake/Fondant Cakes/3.png",
+        "price" : 450
         
     },
     {
         "category" : "Fondant Cakes",
-        "image" : "images/cake/Fondant Cakes/4.png"
+        "image" : "images/cake/Fondant Cakes/4.png",
+        "price" : 450
         
     },
     {
         "category" : "Fondant Cakes",
-        "image" : "images/cake/Fondant Cakes/5.png"
+        "image" : "images/cake/Fondant Cakes/5.png",
+        "price" : 450
         
     },
     {
         "category" : "Minimalist Cakes",
-        "image" : "images/cake/Minimalist Cakes/1.png"
+        "image" : "images/cake/Minimalist Cakes/1.png",
+        "price" : 550
         
     },
     {
         "category" : "Minimalist Cakes",
-        "image" : "images/cake/Minimalist Cakes/2.png"
+        "image" : "images/cake/Minimalist Cakes/2.png",
+        "price" : 550
         
     },
     {
         "category" : "Minimalist Cakes",
-        "image" : "images/cake/Minimalist Cakes/3.png"
+        "image" : "images/cake/Minimalist Cakes/3.png",
+        "price" : 550
         
     },
     {
         "category" : "Minimalist Cakes",
-        "image" : "images/cake/Minimalist Cakes/4.png"
+        "image" : "images/cake/Minimalist Cakes/4.png",
+        "price" : 550
         
     },
     {
         "category" : "Minimalist Cakes",
-        "image" : "images/cake/Minimalist Cakes/5.png"
+        "image" : "images/cake/Minimalist Cakes/5.png",
+        "price" : 550
         
     },
     {
         "category" : "Money Cakes",
-        "image" : "images/cake/Money Cakes/1.png"
+        "image" : "images/cake/Money Cakes/1.png",
+        "price" : 800
         
     },
     {
         "category" : "Money Cakes",
-        "image" : "images/cake/Money Cakes/2.png"
+        "image" : "images/cake/Money Cakes/2.png",
+        "price" : 800
         
     },
     {
         "category" : "Money Cakes",
-        "image" : "images/cake/Money Cakes/3.png"
+        "image" : "images/cake/Money Cakes/3.png",
+        "price" : 800
         
     },
     {
         "category" : "Money Cakes",
-        "image" : "images/cake/Money Cakes/4.png"
+        "image" : "images/cake/Money Cakes/4.png",
+        "price" : 800
         
     },
     {
         "category" : "Money Cakes",
-        "image" : "images/cake/Money Cakes/5.png"
+        "image" : "images/cake/Money Cakes/5.png",
+        "price" : 800
         
     },
     {
         "category" : "Number Cakes",
-        "image" : "images/cake/Number Cakes/1.png"
+        "image" : "images/cake/Number Cakes/1.png",
+        "price" : 750
         
     },
     {
         "category" : "Number Cakes",
-        "image" : "images/cake/Number Cakes/2.png"
+        "image" : "images/cake/Number Cakes/2.png",
+        "price" : 750
         
     },
     {
         "category" : "Number Cakes",
-        "image" : "images/cake/Number Cakes/3.png"
+        "image" : "images/cake/Number Cakes/3.png",
+        "price" : 750
         
     },
     {
         "category" : "Themed Cakes",
-        "image" : "images/cake/Themed Cakes/1.png"
+        "image" : "images/cake/Themed Cakes/1.png",
+        "price" : 700
         
     },
     {
         "category" : "Themed Cakes",
-        "image" : "images/cake/Themed Cakes/2.png"
+        "image" : "images/cake/Themed Cakes/2.png",
+        "price" : 700
         
     },
     {
         "category" : "Themed Cakes",
-        "image" : "images/cake/Themed Cakes/3.png"
+        "image" : "images/cake/Themed Cakes/3.png",
+        "price" : 700
         
     },
     {
         "category" : "Themed Cakes",
-        "image" : "images/cake/Themed Cakes/4.png"
+        "image" : "images/cake/Themed Cakes/4.png",
+        "price" : 700
         
     },
     {
         "category" : "Themed Cakes",
-        "image" : "images/cake/Themed Cakes/5.png"
+        "image" : "images/cake/Themed Cakes/5.png",
+        "price" : 700
         
     }
 ]

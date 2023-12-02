@@ -102,7 +102,7 @@ class UserController extends Controller
     {
 
         $existing = CaterCart::where('item_id', $request->item_id)
-            ->where('cart_id', $request->cart_id)->first();
+            ->where('cart_id', $request->cart_id)->where('status', 'unordered')->first();
         if ($existing) {
             return response()->json([
                 'error' => "This package is already on your rental package!"
@@ -178,6 +178,7 @@ class UserController extends Controller
         $data->item_id = $request->item_id;
         $data->rental_id = Auth::user()->id;
         $data->name = $request->name;
+        $data->phone = $request->phone;
         $data->address = $request->address;
         $data->date = $request->date;
         $data->downpayment = $request->downpayment;
@@ -214,6 +215,7 @@ class UserController extends Controller
         $data->item_id = $request->item_id;
         $data->order_id = Auth::user()->id;
         $data->name = $request->name;
+        $data->phone = $request->phone;
         $data->quantity = $request->quantity;
         $data->address = $request->address;
         $data->date = $request->date;

@@ -33,7 +33,13 @@
                                     <div class="d-flex justify-content-end gap-2 mb-2 me-2">
                                         <input type="hidden" name="cart_id" value="{{ Auth::user()->id }}">
                                         <input type="hidden" name="item_id" value="{{ $item->id }}">
-                                        <button class="btn btn-sm btn-primary " style="max-width: 95px">Rent</button>
+                                        @if ($item->quantity > 0)
+                                            <button class="btn btn-sm btn-primary "
+                                                style="max-width: 95px">Rent</button>
+                                        @else
+                                            <button disabled class="btn btn-sm btn-danger "
+                                                style="max-width: 95px">Unavailable</button>
+                                        @endif
                                     </div>
                                 </form>
                             @else

@@ -59,9 +59,9 @@
                                     <div class="d-flex justify-content-between ">
                                         <p class="fw-bold fs-3 text-white">
                                             @php
-                                                $cake = App\Models\Cake::count();
+                                                $cake_order = App\Models\CakeOrder::count();
                                             @endphp
-                                            {{ $cake }}
+                                            {{ $cake_order }}
                                         </p>
 
                                         <img src="content/logo/arrow.svg" alt=""
@@ -80,9 +80,9 @@
                                     <div class="d-flex justify-content-between ">
                                         <p class="fw-bold fs-3 text-white">
                                             @php
-                                                $cake = App\Models\Cake::count();
+                                                $package_rental = App\Models\Rental::count();
                                             @endphp
-                                            {{ $cake }}
+                                            {{ $package_rental }}
                                         </p>
 
                                         <img src="content/logo/arrow2.svg" alt=""
@@ -117,7 +117,7 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>Joel Rioflorido</td>
+                                                    <td>Juan Dela Cruz</td>
                                                     <td>Proper Bansud</td>
                                                     <td>Package 1</td>
                                                     <td>
@@ -192,10 +192,14 @@
                         <div class="col-12 grid-margin stretch-card">
                             <div class="card card-rounded">
                                 <div class="card-body">
+                                    @php
+                                        $package = App\Models\Package::where('quantity', 0)->get();
+                                        $package_count = $package->count();
+                                    @endphp
                                     <div class="d-sm-flex justify-content-between align-items-start">
                                         <div>
                                             <h4 class="card-title card-title-dash">Unavailable Catering Service</h4>
-                                            <p class="card-subtitle card-subtitle-dash">0</p>
+                                            <p class="card-subtitle card-subtitle-dash">{{ $package_count }} </p>
                                         </div>
                                     </div>
                                     <div class="table-responsive  mt-1" style="max-height: 300px">
@@ -208,14 +212,17 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>Joel Rioflorido</td>
-                                                    <td>0</td>
-                                                    <td>
-                                                        <div class="badge badge-opacity-warning">
-                                                            Unavailable</div>
-                                                    </td>
-                                                </tr>
+
+                                                @foreach ($package as $item)
+                                                    <tr>
+                                                        <td>{{ $item->name }}</td>
+                                                        <td>{{ $item->quantity }}</td>
+                                                        <td>
+                                                            <div class="badge badge-opacity-warning">
+                                                                Unavailable</div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>

@@ -4,7 +4,7 @@
         <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
             <div class="row" id="all-data">
                 {{-- Add Cake --}}
-                <div class="col-lg-12 d-flex flex-column">
+                <div class="col-lg-12 d-flex flex-column" style="min-height: 60vh;">
                     <div class="row flex-grow">
                         <div class="col-12 grid-margin stretch-card">
                             <div class="card card-rounded">
@@ -41,7 +41,8 @@
                                                             @php
                                                                 $cake_item = App\Models\Cake::where('id', $cake->item_id)->first();
                                                             @endphp
-                                                            <button class="btn cater-info-btn" value="{{ $cake_item->id }}">
+                                                            <button class="btn cake-message-btn"
+                                                                value="{{ $cake->id }}">
                                                                 {{ $cake_item->category }}
                                                             </button>
                                                         </td>
@@ -72,12 +73,12 @@
                                                                         class="mdi mdi-thumb-down-outline text-dark fs-6"></i>
                                                                 </button>
                                                             @else
-                                                                <button class="btn approve-rent-btn"
+                                                                <button class="btn approve-cake-btn"
                                                                     value="{{ $cake->id }}">
                                                                     <i
                                                                         class="mdi mdi-thumb-up-outline text-success fs-6"></i>
                                                                 </button>
-                                                                <button class="btn  decline-rent-btn"
+                                                                <button class="btn  decline-cake-btn"
                                                                     value="{{ $cake->id }}">
                                                                     <i
                                                                         class="mdi mdi-thumb-down-outline text-danger fs-6"></i>
@@ -105,4 +106,5 @@
 
     <x-cater-info />
     <x-view-downpayment />
+    <x-cake-message />
 @endsection

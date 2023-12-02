@@ -1176,3 +1176,66 @@ $(document).on("click", ".view-cake-down", function () {
         },
     });
 });
+// cake message toggle
+$(document).on("click", ".cake-message-btn", function () {
+    var id = $(this).val();
+    console.log(id);
+    $("#message-modal").modal("show");
+    $.ajax({
+        url: "/get-cake-message/" + id,
+        type: "get",
+        success: function (res) {
+            console.log(res);
+            $("#cake-message").html(res.message);
+        },
+    });
+});
+// approve cake order
+$(document).on("click", ".approve-cake-btn", function () {
+    var id = $(this).val();
+    console.log(id);
+    $.ajax({
+        url: "/approve-cake/" + id,
+        type: "get",
+        success: function (res) {
+            if (res.success) {
+                $("#success-modal").modal("show");
+                $("#success-message").html(res.success);
+                $("#all-data").load(window.location.href + " #all-data");
+            } else {
+                $("#error-modal").modal("show");
+                $("#error-message").html(res.error);
+            }
+            // If you want to hide a success message after 1.5 seconds, uncomment the following lines
+            setTimeout(function () {
+                $("#success-modal").modal("hide");
+                $("#error-modal").modal("hide");
+            }, 2000);
+        },
+    });
+});
+// decline cake order
+$(document).on("click", ".decline-cake-btn", function () {
+    var id = $(this).val();
+    console.log(id);
+    $.ajax({
+        url: "/decline-cake/" + id,
+        type: "get",
+        success: function (res) {
+            if (res.success) {
+                $("#success-modal").modal("show");
+                $("#success-message").html(res.success);
+                $("#all-data").load(window.location.href + " #all-data");
+            } else {
+                $("#error-modal").modal("show");
+                $("#error-message").html(res.error);
+                $("#all-data").load(window.location.href + " #all-data");
+            }
+            // If you want to hide a success message after 1.5 seconds, uncomment the following lines
+            setTimeout(function () {
+                $("#success-modal").modal("hide");
+                $("#error-modal").modal("hide");
+            }, 2000);
+        },
+    });
+});
