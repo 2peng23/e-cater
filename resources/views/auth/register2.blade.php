@@ -36,28 +36,37 @@
                         </a>
                     </div>
                     <h5 class="text-center fw-bolder fs-1 pb-4 text-muted">Create Your Account</h5>
-                    <form class="px-5">
+                    <div class="p-3">
+                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                    </div>
+                    <form class="px-5" method="POST" action="{{ route('register') }}">
+                        @csrf
+
                         <div class="form-group mb-4">
                             <label class="mb-2" for="Name">Name <span class="text-danger">*</span></label>
                             <input autofocus type="text" class="form-control py-2 px-3" style="border-radius: 20px"
-                                id="Name" placeholder="Enter Full Name">
+                                id="Name" placeholder="Enter Full Name" name="name" :value="old('name')"
+                                autofocus>
                         </div>
                         <div class="form-group mb-4">
                             <label class="mb-2" for="email">Email Address <span
                                     class="text-danger">*</span></label>
                             <input type="text" class="form-control py-2 px-3" style="border-radius: 20px"
-                                id="email" placeholder="Enter email address">
+                                id="email" placeholder="Enter email address" name="email" :value="old('email')">
                         </div>
                         <div class="form-group mb-4">
                             <label class="mb-2" for="password">Password <span class="text-danger">*</span></label>
                             <input type="password" class="form-control py-2 px-3" style="border-radius: 20px"
-                                id="password" placeholder="Enter your password">
+                                id="password" placeholder="Enter your password" name="password">
                         </div>
                         <div class="form-group mb-4">
                             <label class="mb-2" for="password_confirmation">Password Confirmation <span
                                     class="text-danger">*</span></label>
-                            <input type="text" class="form-control py-2 px-3" style="border-radius: 20px"
-                                id="password_confirmation" placeholder="Confirm Password">
+                            <input type="password" class="form-control py-2 px-3" style="border-radius: 20px"
+                                id="password_confirmation" placeholder="Confirm Password" name="password_confirmation">
                         </div>
                         <button type="submit" class="btn btn-primary py-2 px-3"
                             style="border-radius: 20px">Register</button>
