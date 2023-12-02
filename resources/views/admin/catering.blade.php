@@ -49,7 +49,7 @@
                                                             </button></p>
                                                         <ul class="row list-unstyled ">
                                                             @foreach ($package->inclusion as $index => $inc)
-                                                                <li class="col-4 mb-1">
+                                                                <li class="col-6 mb-1">
                                                                     <p class="card-text">{{ $inc }}
                                                                         <button class="rounded cater-delete-inclusion"
                                                                             value="{{ $package->id }}"
