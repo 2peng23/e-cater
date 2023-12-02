@@ -35,7 +35,7 @@
                                     </div>
                                     <div class="row mt-4">
                                         @foreach ($packages as $package)
-                                            <div class="col-12 col-md-6 col-lg-4 cater-data">
+                                            <div class="col-12 col-md-6 cater-data">
                                                 <div class="card">
                                                     <img src="{{ $package->image }}" class="card-img-top"
                                                         alt="Catering Image" style="height: 250px">
