@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BillingInformation;
 use App\Models\Cake;
+use App\Models\CakeOrder;
 use App\Models\Category;
 use App\Models\CaterStock;
 use App\Models\Package;
@@ -343,5 +344,56 @@ class AdminController extends Controller
         return response()->json([
             'error' => "Rental has been declined!"
         ]);
+    }
+    public function allCakeOrder(Request $request)
+    {
+        $cakes = DB::table('cake_orders')->orderBy('updated_at', 'desc');
+        // Retrieve input parameters
+        $name = $request->input('rental_name');
+        $date = $request->input('rental_date');
+        // $page = $request->input('page_select', 5); // Set a default value for page if not provided
+        // Apply filters
+        if ($name) {
+            $cakes->where('name', 'like', "%{$name}%");
+        }
+
+        // Search by Date Range
+        if ($date) {
+            $dateArray = explode(' - ', $date);
+            $start_date = \Carbon\Carbon::createFromFormat('m/d/Y', $dateArray[0])->startOfDay();
+            $end_date = \Carbon\Carbon::createFromFormat('m/d/Y', $dateArray[1])->endOfDay();
+            $cakes = $cakes->whereBetween('created_at', [$start_date, $end_date]);
+        }
+        // Paginate the results
+        $cakes = $cakes->paginate(10);
+
+        // Append parameters to pagination links
+        $cakes->appends(['appointment_name' => $name, 'appointment_date' => $date]);
+        return view('admin.all-cake-order', compact('cakes', 'name', 'date'));
+    }
+    public function getBillingImage(Request $request)
+    {
+        $cake_order = $request->cake_id;
+        if ($cake_order) {
+            $data = CakeOrder::find($cake_order);
+            $cake = Cake::where('id', $data->id)->first();
+            return response()->json([
+                'image' => $data->image,
+                'quantity' => $data->quantity,
+                'downpayment' => $data->downpayment,
+                'price' => $cake->price,
+                'totalPrice' => $data->quantity * $cake->price,
+            ]);
+        }
+        $rental = $request->rental_id;
+        if ($rental) {
+            $data = Rental::find($rental);
+            $rental = Package::where('id', $data->id)->first();
+            return response()->json([
+                'price' => $rental->price,
+                'downpayment' => $data->downpayment,
+                'image' => $data->image
+            ]);
+        }
     }
 }

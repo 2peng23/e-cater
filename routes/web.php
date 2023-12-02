@@ -41,6 +41,8 @@ Route::middleware('auth')->group(function () {
         Route::get('client-rentals', [AdminController::class, 'clientRental'])->name('client-rentals');
         Route::get('approve-rent/{id}', [AdminController::class, 'approveRent'])->name('approve-rent');
         Route::get('decline-rent/{id}', [AdminController::class, 'declineRent'])->name('decline-rent');
+        Route::get('all-cake-orders', [AdminController::class, 'allCakeOrder'])->name('all-cake-orders');
+        Route::get('get-billing-image', [AdminController::class, 'getBillingImage'])->name('get-billing-image');
         // cake
         Route::get('cake', [AdminController::class, 'cake'])->name('cake');
         Route::post('create-category', [AdminController::class, 'createCategory'])->name('create-category');

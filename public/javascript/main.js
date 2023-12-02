@@ -972,51 +972,62 @@ $(document).on("click", ".billing-info-btn", function () {
     });
 });
 // submit rent order
-// $(document).on("submit", "#rental-order-form", function (e) {
-//     e.preventDefault();
-//     // Get the form data
-//     var formData = new FormData(this);
-//     $.ajax({
-//         url: "/rental-order",
-//         type: "post",
-//         data: formData,
-//         contentType: false,
-//         processData: false,
-//         success: function (res) {
-//             // Reset the form
-//             $("#rental-order-form")[0].reset();
-//             if (res.success) {
-//                 $("#success-modal").modal("show");
-//                 $("#success-message").html(res.success);
-//             } else {
-//                 $("#error-modal").modal("show");
-//                 $("#error-message").html(res.error);
-//             }
-//             // If you want to hide a success message after 1.5 seconds, uncomment the following lines
-//             setTimeout(function () {
-//                 $("#success-modal").modal("hide");
-//                 $("#error-modal").modal("hide");
-//             }, 2000);
-//         },
-//         error: function (xhr, status, error) {
-//             // If you want to handle errors and display error messages, uncomment the following lines
-//             var errors = xhr.responseJSON.errors;
-//             var errorString = "";
-//             $.each(errors, function (key, value) {
-//                 errorString += value + "<br>";
-//             });
-//             $("#error-modal").modal("show");
-//             $("#error-message").html(errorString);
-//             setTimeout(function () {
-//                 $("#error-modal").modal("hide");
-//             }, 2000);
-//         },
-//     });
-// });
+$(document).on("submit", "#rental-order-form", function (e) {
+    e.preventDefault();
+    // Get the form data
+    var formData = new FormData(this);
+    $.ajax({
+        url: "/rental-order",
+        type: "post",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (res) {
+            // Reset the form
+            $("#rental-order-form")[0].reset();
+            if (res.success) {
+                $("#success-modal").modal("show");
+                $("#success-message").html(res.success);
+            } else {
+                $("#error-modal").modal("show");
+                $("#error-message").html(res.error);
+            }
+            // If you want to hide a success message after 1.5 seconds, uncomment the following lines
+            setTimeout(function () {
+                $("#success-modal").modal("hide");
+                $("#error-modal").modal("hide");
+            }, 2000);
+        },
+        error: function (xhr, status, error) {
+            // If you want to handle errors and display error messages, uncomment the following lines
+            var errors = xhr.responseJSON.errors;
+            var errorString = "";
+            $.each(errors, function (key, value) {
+                errorString += value + "<br>";
+            });
+            $("#error-modal").modal("show");
+            $("#error-message").html(errorString);
+            setTimeout(function () {
+                $("#error-modal").modal("hide");
+            }, 2000);
+        },
+    });
+});
 // view down info
 $(document).on("click", ".view-down-btn", function () {
-    var id = $(this).val();
+    var rental_id = $(this).val();
     $("#view-down-modal").modal("show");
+    $.ajax({
+        url: "/get-billing-image",
+        data: { rental_id: rental_id },
+        type: "get",
+        success: function (res) {
+            $("#package-info").show();
+            $("#package-price").html("Price:" + res.price);
+            $("#package-downpayment").html("Downpayment:" + res.downpayment);
+            $("#downpayment-image").attr("src", res.image);
+        },
+    });
 });
 // approve
 $(document).on("click", ".approve-rent-btn", function () {
@@ -1144,6 +1155,24 @@ $(document).on("submit", "#avail-cake-form", function (e) {
             setTimeout(function () {
                 $("#error-modal").modal("hide");
             }, 2000);
+        },
+    });
+});
+// view down info
+$(document).on("click", ".view-cake-down", function () {
+    var cake_id = $(this).val();
+    $("#view-down-modal").modal("show");
+    $.ajax({
+        url: "/get-billing-image",
+        data: { cake_id: cake_id },
+        type: "get",
+        success: function (res) {
+            $("#cake-info").show();
+            $("#cake_quantity").html(res.quantity);
+            $("#cake_price").html(res.price);
+            $("#cake_totalPrice").html(res.totalPrice);
+            $("#cake_downpayment").html(res.downpayment);
+            $("#downpayment-image").attr("src", res.image);
         },
     });
 });

@@ -8,24 +8,27 @@
             {{-- <form action="{{ route('add-cake') }}" id="add-cake-form" enctype="multipart/form-data" method="POST">
                 @csrf --}}
             <div class="modal-body">
-                <div class="m-2">
-                    <img src="{{ $rental }}" alt="" style="width: 300px; height: 300px">
-                </div>
-                {{-- <div class="m-2">
-                    <label for="image" class="form-label"> Image <span class="text-danger">*</span></label>
-                    <input type="file" class="form-control" name="image" id="image" accept="image/*" required>
-                </div>
+                <div>
+                    <div id="cake-info" style="display: none">
+                        <p class="mb-2">Quantity: <span id="cake_quantity"></span></p>
+                        <p class="mb-2">Price: <span id="cake_price"></span></p>
+                        <p class="mb-2">Total Price: <span id="cake_totalPrice"></span></p>
+                        <p class="mb-2">Downpayment: <span id="cake_downpayment"></span></p>
+                    </div>
 
-                <div class="m-2">
-                    <label for="price" class="form-label"> Price <span class="text-danger">*</span></label>
-                    <input type="number" class="form-control" name="price" id="price" required>
-                </div> --}}
+                    <div style="display: none" id="package-info">
+                        <p class="mb-2" id="package-price"></p>
+                        <p class="mb-2" id="package-downpayment"></p>
+                    </div>
+                    <div class="m-2">
+                        <img src="" id="downpayment-image" alt="" style="width: 300px; height: 300px">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    {{-- <button type="submit" class="btn btn-primary text-white">Save changes</button> --}}
+                </div>
+                {{-- </form> --}}
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                {{-- <button type="submit" class="btn btn-primary text-white">Save changes</button> --}}
-            </div>
-            {{-- </form> --}}
         </div>
     </div>
-</div>

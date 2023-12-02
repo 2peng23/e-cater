@@ -11,7 +11,7 @@
                                 <div class="card-body">
                                     <div class="d-sm-flex justify-content-between align-items-start">
                                         <div class="d-flex justify-content-between align-items-center  gap-2 ">
-                                            <h4 class="card-title card-title-dash">Rentals</h4>
+                                            <h4 class="card-title card-title-dash">Cake Orders</h4>
                                         </div>
                                     </div>
                                     <div class="table-responsive  mt-1" id="cake-list">
@@ -22,48 +22,48 @@
                                             <thead>
                                                 <tr class="text-center">
                                                     <th>Name</th>
-                                                    <th>Event Address</th>
+                                                    <th>Address</th>
                                                     <th>Event Date</th>
-                                                    <th>Package</th>
+                                                    <th>Cake Type</th>
                                                     <th>Downpayment</th>
                                                     <th>Status</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($rentals as $rental)
+                                                @foreach ($cakes as $cake)
                                                     <tr class="text-center">
-                                                        <td>{{ $rental->name }}</td>
-                                                        <td>{{ $rental->address }}</td>
-                                                        <td>{{ \Carbon\Carbon::parse($rental->date)->format('F j, Y') }}
+                                                        <td>{{ $cake->name }}</td>
+                                                        <td>{{ $cake->address }}</td>
+                                                        <td>{{ \Carbon\Carbon::parse($cake->date)->format('F j, Y') }}
                                                         </td>
                                                         <td>
                                                             @php
-                                                                $package = App\Models\Package::where('id', $rental->item_id)->first();
+                                                                $cake_item = App\Models\Cake::where('id', $cake->item_id)->first();
                                                             @endphp
-                                                            <button class="btn cater-info-btn" value="{{ $package->id }}">
-                                                                {{ $package->name }}
+                                                            <button class="btn cater-info-btn" value="{{ $cake_item->id }}">
+                                                                {{ $cake_item->category }}
                                                             </button>
                                                         </td>
                                                         <td>
-                                                            <button class="btn view-down-btn" value="{{ $rental->id }}">
-                                                                {{ $rental->downpayment }}
+                                                            <button class="btn view-cake-down" value="{{ $cake->id }}">
+                                                                {{ $cake->downpayment }}
                                                             </button>
                                                         </td>
                                                         <td>
-                                                            @if ($rental->status == 'approved')
+                                                            @if ($cake->status == 'approved')
                                                                 <div class="badge badge-opacity-success">
-                                                                    {{ $rental->status }}</div>
-                                                            @elseif ($rental->status == 'declined')
+                                                                    {{ $cake->status }}</div>
+                                                            @elseif ($cake->status == 'declined')
                                                                 <div class="badge badge-opacity-danger">
-                                                                    {{ $rental->status }}</div>
+                                                                    {{ $cake->status }}</div>
                                                             @else
                                                                 <div class="badge badge-opacity-warning">
-                                                                    {{ $rental->status }}</div>
+                                                                    {{ $cake->status }}</div>
                                                             @endif
                                                         </td>
                                                         <td>
-                                                            @if ($rental->status != 'pending')
+                                                            @if ($cake->status != 'pending')
                                                                 <button class="btn info-cake-btn" disabled>
                                                                     <i class="mdi mdi-thumb-up-outline text-dark fs-6"></i>
                                                                 </button>
@@ -73,12 +73,12 @@
                                                                 </button>
                                                             @else
                                                                 <button class="btn approve-rent-btn"
-                                                                    value="{{ $rental->id }}">
+                                                                    value="{{ $cake->id }}">
                                                                     <i
                                                                         class="mdi mdi-thumb-up-outline text-success fs-6"></i>
                                                                 </button>
                                                                 <button class="btn  decline-rent-btn"
-                                                                    value="{{ $rental->id }}">
+                                                                    value="{{ $cake->id }}">
                                                                     <i
                                                                         class="mdi mdi-thumb-down-outline text-danger fs-6"></i>
                                                                 </button>
@@ -88,7 +88,7 @@
                                                 @endforeach
                                             </tbody>
                                         </table>
-                                        {{ $rentals->links('vendor.pagination.bootstrap-5') }}
+                                        {{ $cakes->links('vendor.pagination.bootstrap-5') }}
                                         {{-- @endif --}}
                                     </div>
 
