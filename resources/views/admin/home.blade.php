@@ -118,7 +118,7 @@
                                             <tbody>
                                                 <tr>
                                                     <td>Juan Dela Cruz</td>
-                                                    <td>Proper Bansud</td>
+                                                    <td>Banus Gloria</td>
                                                     <td>Package 1</td>
                                                     <td>
                                                         <div class="badge badge-opacity-success">
