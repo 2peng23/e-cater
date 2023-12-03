@@ -1280,7 +1280,7 @@ $(document).on("submit", "#pay-cake-form", function (e) {
         },
     });
 });
-// submit cake pay
+// submit rent pay
 $(document).on("submit", "#pay-rental-form", function (e) {
     e.preventDefault();
     // Get the form data

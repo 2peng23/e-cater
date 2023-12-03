@@ -73,4 +73,48 @@
             </form>
         </div>
     </div>
+    <script>
+        // submit cake pay
+        $(document).on("submit", "#pay-cake-form", function(e) {
+            e.preventDefault();
+            // Get the form data
+            var formData = new FormData(this);
+            $.ajax({
+                url: "/pay-cake",
+                type: "post",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(res) {
+                    // Reset the form
+                    $("#pay-cake-form")[0].reset();
+                    if (res.success) {
+                        $("#success-modal").modal("show");
+                        $("#success-message").html(res.success);
+                    } else {
+                        $("#error-modal").modal("show");
+                        $("#error-message").html(res.error);
+                    }
+                    // If you want to hide a success message after 1.5 seconds, uncomment the following lines
+                    setTimeout(function() {
+                        $("#success-modal").modal("hide");
+                        $("#error-modal").modal("hide");
+                    }, 2000);
+                },
+                error: function(xhr, status, error) {
+                    // If you want to handle errors and display error messages, uncomment the following lines
+                    var errors = xhr.responseJSON.errors;
+                    var errorString = "";
+                    $.each(errors, function(key, value) {
+                        errorString += value + "<br>";
+                    });
+                    $("#error-modal").modal("show");
+                    $("#error-message").html(errorString);
+                    setTimeout(function() {
+                        $("#error-modal").modal("hide");
+                    }, 2000);
+                },
+            });
+        });
+    </script>
 @endsection
