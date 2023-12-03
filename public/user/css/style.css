@@ -185,7 +185,7 @@
     justify-content: space-between;
 }
 
-.header-carousel .owl-nav .owl-prev,
+/* .header-carousel .owl-nav .owl-prev,
 .header-carousel .owl-nav .owl-next {
     width: 45px;
     height: 45px;
@@ -197,7 +197,7 @@
     border: 1px solid #FFFFFF;
     font-size: 22px;
     transition: .5s;
-}
+} */
 
 .header-carousel .owl-nav .owl-prev:hover,
 .header-carousel .owl-nav .owl-next:hover {
