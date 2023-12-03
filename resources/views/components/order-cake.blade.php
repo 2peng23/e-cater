@@ -26,9 +26,9 @@
                     <div class="mb-2">
                         <p class="text-danger" id='disagree'></p>
                     </div>
-                    <div class="mb-2 d-flex align-items-center justify-content-between  ">
+                    <div class="mb-2 container">
+                        <input type="checkbox" class="form-check-input" name="agree" id="agree" value=1>
                         <label for="agree" class="form-label fw-bold">Accept Terms and Conditions</label>
-                        <input type="checkbox" class="form-check-input p-2" name="agree" id="agree" value=1>
                     </div>
                     <button type="submit" class="btn btn-primary">Order Cake</button>
                 </form>

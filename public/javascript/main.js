@@ -782,18 +782,17 @@ $(document).on("click", ".cater-info-btn", function () {
 
             // Iterate through the 'inc' array and append each element to the ul
             for (var i = 0; i < inc.length; i++) {
-                // Create a new <li> element
-                var listItem = $("<li>");
-                listItem.addClass("col-6");
-
-                // Set the text content of the <li> to the array element
-                listItem.text(inc[i]);
+                // Create a new <li> element with a column class
+                var listItem = $("<li>").addClass("col-6");
 
                 // Create an <i> element with the specified classes
                 var icon = $("<i>").addClass("fa fa-check-circle text-success");
 
-                // Add a space before appending the <i> element to the <li>
-                listItem.append(" ").append(icon);
+                // Append the <i> element to the <li> before the text content
+                listItem.append(icon);
+
+                // Set the text content of the <li> to the array element
+                listItem.append(" " + inc[i]);
 
                 // Append the list item to the ul
                 ul.append(listItem);
