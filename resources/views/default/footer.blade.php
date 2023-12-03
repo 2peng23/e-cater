@@ -3,7 +3,7 @@
     <div class="container py-5">
         <div class="row g-5">
             <div class="col-6">
-                <h4 class="text-light mb-4">Murill Cake Haus and Catering Services</h4>
+                <h4 class="text-light mb-4">Murillo Cake Haus and Catering Services</h4>
                 <div class="mb-2">
                     <small>Your partner incelebrating in life.</small> <br>
                     <small>Let's make your dream event happen.</small>
