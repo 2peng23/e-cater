@@ -5,7 +5,7 @@
             <div class="col-6">
                 <h4 class="text-light mb-4">Murillo Cake Haus and Catering Services</h4>
                 <div class="mb-2">
-                    <small>Your partner incelebrating in life.</small> <br>
+                    <small>Your partner in celebrating in life.</small> <br>
                     <small>Let's make your dream event happen.</small>
                 </div>
                 <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Banus, Gloria Oriental Mindoro</p>
