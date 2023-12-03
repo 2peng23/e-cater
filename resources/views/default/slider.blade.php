@@ -22,6 +22,7 @@
                 </div>
             </div>
         </div>
+        {{-- haha --}}
         <div class="owl-carousel-item position-relative">
             <img class="img-fluid" src="content/styling-images/2.jpg" alt="" style="max-height: 600px">
             <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
