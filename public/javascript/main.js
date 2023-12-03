@@ -793,7 +793,7 @@ $(document).on("click", ".cater-info-btn", function () {
 
                 // Set the text content of the <li> to the array element
                 listItem.append(" " + inc[i]);
-
+                // haha
                 // Append the list item to the ul
                 ul.append(listItem);
             }
