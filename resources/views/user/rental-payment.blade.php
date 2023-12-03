@@ -66,7 +66,7 @@
             </form>
         </div>
     </div>
-    <script>
+    {{-- <script>
         // submit rent pay
         $(document).on("submit", "#pay-rental-form", function(e) {
             e.preventDefault();
@@ -109,5 +109,5 @@
                 },
             });
         });
-    </script>
+    </script> --}}
 @endsection

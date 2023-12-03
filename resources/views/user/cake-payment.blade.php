@@ -73,7 +73,7 @@
             </form>
         </div>
     </div>
-    <script>
+    {{-- <script>
         // submit cake pay
         $(document).on("submit", "#pay-cake-form", function(e) {
             e.preventDefault();
@@ -116,5 +116,5 @@
                 },
             });
         });
-    </script>
+    </script> --}}
 @endsection
