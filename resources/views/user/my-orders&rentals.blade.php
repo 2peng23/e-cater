@@ -18,6 +18,7 @@
                                     <th>Downpayment</th>
                                     <th>Customization</th>
                                     <th>Status</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -36,6 +37,13 @@
                                         <td>P{{ number_format($cake->downpayment, 2) }}</td>
                                         <td>{{ $cake->customize }}</td>
                                         <td>{{ $cake->status }}</td>
+                                        @if ($cake->status == 'approved' && $cake->downpayment == 0)
+                                            <td>
+                                                <a class="btn btn-primary"
+                                                    href="{{ route('cake-payment', $cake->id) }}">Proceed
+                                                    Payment</a>
+                                            </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -57,6 +65,7 @@
                                     <th>Price</th>
                                     <th>Downpayment</th>
                                     <th>Status</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -74,6 +83,13 @@
                                         <td>P{{ number_format($item->price, 2) }}</td>
                                         <td>P{{ number_format($rental->downpayment, 2) }}</td>
                                         <td>{{ $rental->status }}</td>
+                                        @if ($rental->status == 'approved' && $rental->downpayment == 0)
+                                            <td>
+                                                <a class="btn btn-primary"
+                                                    href="{{ route('rental-payment', $rental->id) }}">Proceed
+                                                    Payment</a>
+                                            </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>

@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('address');
             $table->string('date');
             $table->string('quantity');
-            $table->string('downpayment');
-            $table->string('image'); //proof of payment image
+            $table->string('downpayment')->default(0);
+            $table->string('image')->nullable(); //proof of payment image
             $table->text('customize')->length(3000);
             $table->string('status')->default('pending');
             $table->timestamps();

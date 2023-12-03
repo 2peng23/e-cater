@@ -43,8 +43,9 @@
                                         @if ($cake->stock > 0)
                                             <input type="hidden" name="cart_id" value="{{ Auth::user()->id }}">
                                             <input type="hidden" name="item_id" value="{{ $cake->id }}">
-                                            <input type="number" class="form-control" min="1" name="quantity"
-                                                value="1" style="max-width: 50px">
+                                            <input type="number" class="form-control" min="1"
+                                                max="{{ $cake->stock }}" name="quantity" value="1"
+                                                style="max-width: 50px">
                                             <button class="btn btn-sm btn-primary " type="submit"
                                                 style="max-width: 95px">Add
                                                 order</button>

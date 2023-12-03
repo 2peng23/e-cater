@@ -46,9 +46,16 @@
                                                             </button>
                                                         </td>
                                                         <td>
-                                                            <button class="btn view-down-btn" value="{{ $rental->id }}">
-                                                                {{ $rental->downpayment }}
-                                                            </button>
+                                                            @if ($rental->downpayment == 0)
+                                                                <button class="btn" value="{{ $rental->id }}">
+                                                                    P{{ number_format($rental->downpayment, 2) }}
+                                                                </button>
+                                                            @else
+                                                                <button class="btn view-down-btn"
+                                                                    value="{{ $rental->id }}">
+                                                                    P{{ number_format($rental->downpayment, 2) }}
+                                                                </button>
+                                                            @endif
                                                         </td>
                                                         <td>
                                                             @if ($rental->status == 'approved')

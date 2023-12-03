@@ -332,6 +332,8 @@ class AdminController extends Controller
         $rental = Rental::find($id);
         $rental->status = 'approved';
         $rental->save();
+
+
         $details = [
             'greetings' => 'Dear Mr/Mrs ' . $rental->name . ',',
             'body' => " Your Package Rental Successfully Confirmed!. We're thrilled to share the fantastic news that your package rental request has been successfully processed! Your chosen package is now reserved and ready to enhance your experience.",
@@ -464,6 +466,12 @@ class AdminController extends Controller
         $cakeOrder = CakeOrder::find($id);
         $cakeOrder->status = 'approved';
         $cakeOrder->save();
+
+
+        $cake = Cake::where('id', $cakeOrder->item_id)->first();
+        $cake->stock = $cake->stock - $cakeOrder->quantity;
+        $cake->save();
+
         $details = [
             'greetings' => 'Dear Mr/Mrs ' . $cakeOrder->name . ',',
             'body' => 'Your cake order has been confirmed. Kindly go to Murillo Cake Haus and Catering Service.',

@@ -19,8 +19,8 @@
                                     <div class="d-flex align-items-center justify-content-between py-3">
                                         <p>Quantity:</p>
                                         <input type="number" class="p-2" style="width:60px"
-                                            value="{{ $cart->quantity }}" min="1" id="cart-quantity"
-                                            data-id="{{ $cart->id }}">
+                                            value="{{ $cart->quantity }}" min="1" max="{{ $cake->stock }}"
+                                            id="cart-quantity" data-id="{{ $cart->id }}">
                                     </div>
                                     <p class="card-text" id="cart-price">P{{ $cart->quantity * $cake->price }}</p>
                                     <div class="d-flex gap-2">

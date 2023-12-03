@@ -163,7 +163,7 @@ class UserController extends Controller
     public function rentOrder(Request $request)
     {
         // remove cake from cart
-        $rental_cart = CaterCart::where('item_id', $request->item_id)->where('cart_id', Auth::user()->id)->first();
+        $rental_cart = CaterCart::where('item_id', $request->item_id)->where('cart_id', Auth::user()->id)->where('status', 'unordered')->first();
         $rental_cart->status = 'ordered';
         $rental_cart->save();
 
@@ -181,17 +181,17 @@ class UserController extends Controller
         $data->phone = $request->phone;
         $data->address = $request->address;
         $data->date = $request->date;
-        $data->downpayment = $request->downpayment;
-        $photo = $request->image;
-        if ($photo) {
-            $photoname = $photo->getClientOriginalName();
+        // $data->downpayment = $request->downpayment;
+        // $photo = $request->image;
+        // if ($photo) {
+        //     $photoname = $photo->getClientOriginalName();
 
-            // Move the uploaded image to the specified directory
-            $photo->move(public_path('images/rental'), $photoname);
+        //     // Move the uploaded image to the specified directory
+        //     $photo->move(public_path('images/rental'), $photoname);
 
-            // Save the image path to the database
-            $data->image = 'images/rental/' . $photoname;
-        }
+        //     // Save the image path to the database
+        //     $data->image = 'images/rental/' . $photoname;
+        // }
         $data->save();
         return response()->json([
             'success' => "You have successfully rent this package!"
@@ -219,18 +219,18 @@ class UserController extends Controller
         $data->quantity = $request->quantity;
         $data->address = $request->address;
         $data->date = $request->date;
-        $data->downpayment = $request->downpayment;
+        // $data->downpayment = $request->downpayment;
         $data->customize = $request->customize;
-        $photo = $request->image;
-        if ($photo) {
-            $photoname = $photo->getClientOriginalName();
+        // $photo = $request->image;
+        // if ($photo) {
+        //     $photoname = $photo->getClientOriginalName();
 
-            // Move the uploaded image to the specified directory
-            $photo->move(public_path('images/cakeOrder'), $photoname);
+        //     // Move the uploaded image to the specified directory
+        //     $photo->move(public_path('images/cakeOrder'), $photoname);
 
-            // Save the image path to the database
-            $data->image = 'images/cakeOrder/' . $photoname;
-        }
+        //     // Save the image path to the database
+        //     $data->image = 'images/cakeOrder/' . $photoname;
+        // }
         $data->save();
         return response()->json([
             'success' => "You have successfully ordered this cake!"
@@ -241,5 +241,55 @@ class UserController extends Controller
         $cake_orders = CakeOrder::where('order_id', Auth::user()->id)->get();
         $rentals = Rental::where('rental_id', Auth::user()->id)->get();
         return view('user.my-orders&rentals', compact('cake_orders', 'rentals'));
+    }
+    public function cakePayment($id)
+    {
+        $cake_order = CakeOrder::find($id);
+        return view('user.cake-payment', compact('cake_order'));
+    }
+    public function payCake(Request $request)
+    {
+        $id = $request->item_id;
+        $cake_order = CakeOrder::find($id);
+        $cake_order->downpayment = $request->downpayment;
+        $photo = $request->image;
+        if ($photo) {
+            $photoname = $photo->getClientOriginalName();
+
+            // Move the uploaded image to the specified directory
+            $photo->move(public_path('images/cakeOrder'), $photoname);
+
+            // Save the image path to the database
+            $cake_order->image = 'images/cakeOrder/' . $photoname;
+        }
+        $cake_order->save();
+        return response()->json([
+            'success' => "Payment has been sent successfully!"
+        ]);
+    }
+    public function rentalPayment($id)
+    {
+        $rental = Rental::find($id);
+        return view('user.rental-payment', compact('rental'));
+    }
+    public function payRental(Request $request)
+    {
+        $id = $request->item_id;
+        $rental = Rental::find($id);
+        $rental->downpayment = $request->downpayment;
+        $photo = $request->image;
+        if ($photo) {
+            $photoname = $photo->getClientOriginalName();
+
+            // Move the uploaded image to the specified directory
+            $photo->move(public_path('images/rental'), $photoname);
+
+            // Save the image path to the database
+            $rental->image = 'images/rental/' . $photoname;
+        }
+        $rental->save();
+        return response()->json([
+            'success' => "Payment has been sent successfully!"
+        ]);
     }
 }

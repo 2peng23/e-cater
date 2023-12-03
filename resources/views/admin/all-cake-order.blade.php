@@ -47,9 +47,16 @@
                                                             </button>
                                                         </td>
                                                         <td>
-                                                            <button class="btn view-cake-down" value="{{ $cake->id }}">
-                                                                {{ $cake->downpayment }}
-                                                            </button>
+                                                            @if ($cake->downpayment == 0)
+                                                                <button class="btn" value="{{ $cake->id }}">
+                                                                    P{{ number_format($cake->downpayment, 2) }}
+                                                                </button>
+                                                            @else
+                                                                <button class="btn view-cake-down"
+                                                                    value="{{ $cake->id }}">
+                                                                    P{{ number_format($cake->downpayment, 2) }}
+                                                                </button>
+                                                            @endif
                                                         </td>
                                                         <td>
                                                             @if ($cake->status == 'approved')

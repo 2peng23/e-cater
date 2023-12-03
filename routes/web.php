@@ -86,6 +86,10 @@ Route::middleware('auth')->group(function () {
         Route::post('rental-order', [UserController::class, 'rentOrder'])->name('rental-order');
         Route::get('order-cake/{id}', [UserController::class, 'orderCake'])->name('order-cake');
         Route::post('avail-cake', [UserController::class, 'availCake'])->name('avail-cake');
+        Route::get('cake-payment/{id}', [UserController::class, 'cakePayment'])->name('cake-payment');
+        Route::post('pay-cake', [UserController::class, 'payCake'])->name('pay-cake');
+        Route::get('rental-payment/{id}', [UserController::class, 'rentalPayment'])->name('rental-payment');
+        Route::post('pay-rental', [UserController::class, 'payRental'])->name('pay-rental');
 
         // my orders and rental
         Route::get('my-orders&rentals', [UserController::class, 'myOrdersRentals'])->name('my-orders&rentals');
